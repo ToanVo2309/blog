@@ -168,21 +168,21 @@ export default function Home() {
           <div className="mx-auto max-w-4xl text-center">
             {/* Social Icons */}
             <div className="mb-8 flex items-center justify-center gap-3">
-              {SOCIALS.map((social) => (
-                <Link
-                  key={social.label}
-                  href={social.path}
-                  rel="noreferrer"
-                  target="_blank"
-                  className={cn(
-                    "group relative flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card transition-all hover:border-primary hover:bg-primary/10 hover:shadow-lg",
-                  )}
-                >
-                  <social.icon className="h-5 w-5 text-foreground transition-colors group-hover:text-primary" />
-                  <span className="sr-only">{social.label}</span>
-                </Link>
-              ))}
-            </div>
+          {SOCIALS.map((social) => (
+            <Link
+              key={social.label}
+              href={social.path}
+              rel="noreferrer"
+              target="_blank"
+              className={cn(
+                    "group relative flex items-center justify-center rounded-full border border-border bg-card transition-all hover:border-primary hover:bg-primary/10 hover:shadow-lg size-11",
+              )}
+            >
+                  <social.icon className="text-foreground transition-colors group-hover:text-primary size-5" />
+              <span className="sr-only">{social.label}</span>
+            </Link>
+          ))}
+        </div>
 
             {/* Main Heading */}
             <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
@@ -190,7 +190,7 @@ export default function Home() {
               <span className="bg-gradient-to-r from-primary via-blue-400 to-cyan-400 bg-clip-text text-transparent">
                 Bảo Toàn
               </span>
-            </h1>
+        </h1>
 
             {/* Subtitle */}
             <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground sm:text-xl">
@@ -207,7 +207,7 @@ export default function Home() {
                   "group relative overflow-hidden bg-primary text-primary-foreground shadow-lg transition-all hover:shadow-xl hover:scale-105",
                 )}
               >
-                <BookOpen className="mr-2 h-5 w-5" />
+                <BookOpen className="mr-2 size-5" />
                 Khám phá Blog
               </Link>
             </div>
@@ -257,14 +257,14 @@ export default function Home() {
               className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-lg transition-all hover:bg-background"
               aria-label="Trước"
             >
-              <ChevronLeft className="h-5 w-5 text-foreground" />
+              <ChevronLeft className="text-foreground size-5" />
             </button>
             <button
               onClick={() => scrollSkills("next")}
               className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-lg transition-all hover:bg-background"
               aria-label="Sau"
             >
-              <ChevronRight className="h-5 w-5 text-foreground" />
+              <ChevronRight className="text-foreground size-5" />
             </button>
 
             <div 
@@ -285,8 +285,8 @@ export default function Home() {
                         skill.color || "from-primary/5 to-primary/10"
                       )}></div>
                       <div className="relative flex flex-col items-center gap-3 text-center">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110">
-                          <Icon className="h-6 w-6 text-primary transition-transform duration-300 group-hover:scale-110" />
+                        <div className="flex items-center justify-center rounded-lg bg-primary/10 transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110 size-12">
+                          <Icon className="text-primary transition-transform duration-300 group-hover:scale-110 size-6" />
                         </div>
                         <h3 className="text-base font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">
                           {skill.name}
@@ -308,8 +308,8 @@ export default function Home() {
                         skill.color || "from-primary/5 to-primary/10"
                       )}></div>
                       <div className="relative flex flex-col items-center gap-3 text-center">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110">
-                          <Icon className="h-6 w-6 text-primary transition-transform duration-300 group-hover:scale-110" />
+                        <div className="flex items-center justify-center rounded-lg bg-primary/10 transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110 size-12">
+                          <Icon className="text-primary transition-transform duration-300 group-hover:scale-110 size-6" />
                         </div>
                         <h3 className="text-base font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">
                           {skill.name}
@@ -331,8 +331,8 @@ export default function Home() {
                         skill.color || "from-primary/5 to-primary/10"
                       )}></div>
                       <div className="relative flex flex-col items-center gap-3 text-center">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110">
-                          <Icon className="h-6 w-6 text-primary transition-transform duration-300 group-hover:scale-110" />
+                        <div className="flex items-center justify-center rounded-lg bg-primary/10 transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110 size-12">
+                          <Icon className="text-primary transition-transform duration-300 group-hover:scale-110 size-6" />
                         </div>
                         <h3 className="text-base font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">
                           {skill.name}
@@ -354,8 +354,8 @@ export default function Home() {
                         skill.color || "from-primary/5 to-primary/10"
                       )}></div>
                       <div className="relative flex flex-col items-center gap-3 text-center">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110">
-                          <Icon className="h-6 w-6 text-primary transition-transform duration-300 group-hover:scale-110" />
+                        <div className="flex items-center justify-center rounded-lg bg-primary/10 transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110 size-12">
+                          <Icon className="text-primary transition-transform duration-300 group-hover:scale-110 size-6" />
                         </div>
                         <h3 className="text-base font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">
                           {skill.name}
@@ -377,8 +377,8 @@ export default function Home() {
                         skill.color || "from-primary/5 to-primary/10"
                       )}></div>
                       <div className="relative flex flex-col items-center gap-3 text-center">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110">
-                          <Icon className="h-6 w-6 text-primary transition-transform duration-300 group-hover:scale-110" />
+                        <div className="flex items-center justify-center rounded-lg bg-primary/10 transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110 size-12">
+                          <Icon className="text-primary transition-transform duration-300 group-hover:scale-110 size-6" />
                         </div>
                         <h3 className="text-base font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">
                           {skill.name}
@@ -397,7 +397,7 @@ export default function Home() {
       <section className="container mx-auto max-w-6xl px-4 py-16 md:py-20">
         <div className="mb-12 text-center">
           <div className="mb-4 flex items-center justify-center gap-3">
-            <Award className="h-8 w-8 text-primary" />
+            <Award className="text-primary size-8" />
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
               Chứng Chỉ & Bằng Cấp
             </h2>
@@ -440,17 +440,17 @@ export default function Home() {
                         });
                       }
                     }}
-                    className="group relative flex h-[180px] w-[320px] shrink-0 cursor-pointer items-center overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-lg hover:scale-[1.02] scroll-snap-start"
+                    className="group relative flex shrink-0 cursor-pointer items-center overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:scale-[1.02] hover:border-primary hover:shadow-lg scroll-snap-start h-[180px] w-[320px]"
                   >
                     <div className="flex w-full items-center gap-4">
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20">
-                        <Icon className="h-7 w-7 text-primary" />
+                      <div className="flex shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20 size-14">
+                        <Icon className="text-primary size-7" />
                       </div>
                       <div className="flex min-w-0 flex-1 flex-col">
-                        <h3 className="mb-2 line-clamp-2 text-lg font-semibold text-foreground leading-tight">
+                        <h3 className="mb-2 text-lg font-semibold leading-tight text-foreground line-clamp-2">
                           {cert.name}
                         </h3>
-                        <p className="mb-1 line-clamp-2 text-sm text-muted-foreground leading-relaxed">{cert.issuer}</p>
+                        <p className="mb-1 text-sm leading-relaxed text-muted-foreground line-clamp-2">{cert.issuer}</p>
                         <p className="mt-auto text-xs text-muted-foreground">{cert.year}</p>
                       </div>
                     </div>
@@ -472,17 +472,17 @@ export default function Home() {
                         });
                       }
                     }}
-                    className="group relative flex h-[180px] w-[320px] shrink-0 cursor-pointer items-center overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-lg hover:scale-[1.02] scroll-snap-start"
+                    className="group relative flex shrink-0 cursor-pointer items-center overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:scale-[1.02] hover:border-primary hover:shadow-lg scroll-snap-start h-[180px] w-[320px]"
                   >
                     <div className="flex w-full items-center gap-4">
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20">
-                        <Icon className="h-7 w-7 text-primary" />
+                      <div className="flex shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20 size-14">
+                        <Icon className="text-primary size-7" />
                       </div>
                       <div className="flex min-w-0 flex-1 flex-col">
-                        <h3 className="mb-2 line-clamp-2 text-lg font-semibold text-foreground leading-tight">
+                        <h3 className="mb-2 text-lg font-semibold leading-tight text-foreground line-clamp-2">
                           {cert.name}
                         </h3>
-                        <p className="mb-1 line-clamp-2 text-sm text-muted-foreground leading-relaxed">{cert.issuer}</p>
+                        <p className="mb-1 text-sm leading-relaxed text-muted-foreground line-clamp-2">{cert.issuer}</p>
                         <p className="mt-auto text-xs text-muted-foreground">{cert.year}</p>
                       </div>
                     </div>
@@ -504,17 +504,17 @@ export default function Home() {
                         });
                       }
                     }}
-                    className="group relative flex h-[180px] w-[320px] shrink-0 cursor-pointer items-center overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-lg hover:scale-[1.02] scroll-snap-start"
+                    className="group relative flex shrink-0 cursor-pointer items-center overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:scale-[1.02] hover:border-primary hover:shadow-lg scroll-snap-start h-[180px] w-[320px]"
                   >
                     <div className="flex w-full items-center gap-4">
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20">
-                        <Icon className="h-7 w-7 text-primary" />
+                      <div className="flex shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20 size-14">
+                        <Icon className="text-primary size-7" />
                       </div>
                       <div className="flex min-w-0 flex-1 flex-col">
-                        <h3 className="mb-2 line-clamp-2 text-lg font-semibold text-foreground leading-tight">
+                        <h3 className="mb-2 text-lg font-semibold leading-tight text-foreground line-clamp-2">
                           {cert.name}
                         </h3>
-                        <p className="mb-1 line-clamp-2 text-sm text-muted-foreground leading-relaxed">{cert.issuer}</p>
+                        <p className="mb-1 text-sm leading-relaxed text-muted-foreground line-clamp-2">{cert.issuer}</p>
                         <p className="mt-auto text-xs text-muted-foreground">{cert.year}</p>
                       </div>
                     </div>
@@ -536,17 +536,17 @@ export default function Home() {
                         });
                       }
                     }}
-                    className="group relative flex h-[180px] w-[320px] shrink-0 cursor-pointer items-center overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-lg hover:scale-[1.02] scroll-snap-start"
+                    className="group relative flex shrink-0 cursor-pointer items-center overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:scale-[1.02] hover:border-primary hover:shadow-lg scroll-snap-start h-[180px] w-[320px]"
                   >
                     <div className="flex w-full items-center gap-4">
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20">
-                        <Icon className="h-7 w-7 text-primary" />
+                      <div className="flex shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20 size-14">
+                        <Icon className="text-primary size-7" />
                       </div>
                       <div className="flex min-w-0 flex-1 flex-col">
-                        <h3 className="mb-2 line-clamp-2 text-lg font-semibold text-foreground leading-tight">
+                        <h3 className="mb-2 text-lg font-semibold leading-tight text-foreground line-clamp-2">
                           {cert.name}
                         </h3>
-                        <p className="mb-1 line-clamp-2 text-sm text-muted-foreground leading-relaxed">{cert.issuer}</p>
+                        <p className="mb-1 text-sm leading-relaxed text-muted-foreground line-clamp-2">{cert.issuer}</p>
                         <p className="mt-auto text-xs text-muted-foreground">{cert.year}</p>
                       </div>
                     </div>
@@ -568,17 +568,17 @@ export default function Home() {
                         });
                       }
                     }}
-                    className="group relative flex h-[180px] w-[320px] shrink-0 cursor-pointer items-center overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-lg hover:scale-[1.02] scroll-snap-start"
+                    className="group relative flex shrink-0 cursor-pointer items-center overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:scale-[1.02] hover:border-primary hover:shadow-lg scroll-snap-start h-[180px] w-[320px]"
                   >
                     <div className="flex w-full items-center gap-4">
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20">
-                        <Icon className="h-7 w-7 text-primary" />
+                      <div className="flex shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20 size-14">
+                        <Icon className="text-primary size-7" />
                       </div>
                       <div className="flex min-w-0 flex-1 flex-col">
-                        <h3 className="mb-2 line-clamp-2 text-lg font-semibold text-foreground leading-tight">
+                        <h3 className="mb-2 text-lg font-semibold leading-tight text-foreground line-clamp-2">
                           {cert.name}
                         </h3>
-                        <p className="mb-1 line-clamp-2 text-sm text-muted-foreground leading-relaxed">{cert.issuer}</p>
+                        <p className="mb-1 text-sm leading-relaxed text-muted-foreground line-clamp-2">{cert.issuer}</p>
                         <p className="mt-auto text-xs text-muted-foreground">{cert.year}</p>
                       </div>
                     </div>
@@ -619,28 +619,28 @@ export default function Home() {
               className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-lg transition-all hover:bg-background"
               aria-label="Trước"
             >
-              <ChevronLeft className="h-5 w-5 text-foreground" />
+              <ChevronLeft className="size-5 text-foreground" />
             </button>
             <button
               onClick={() => scrollProjects("next")}
               className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-lg transition-all hover:bg-background"
               aria-label="Sau"
             >
-              <ChevronRight className="h-5 w-5 text-foreground" />
+              <ChevronRight className="size-5 text-foreground" />
             </button>
 
             <div 
               ref={projectsScrollRef}
-              className="overflow-x-auto scrollbar-hide scroll-smooth"
+              className="overflow-x-auto scroll-smooth scrollbar-hide"
               style={{ scrollSnapType: 'x mandatory' }}
             >
               <div className="flex gap-8 pb-4">
                 {/* Duplicate first 2 projects for infinite scroll */}
                 {/* Project 1: Web đánh giá game */}
-                <div className="group relative min-w-[380px] max-w-[380px] shrink-0 overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-lg scroll-snap-align-start">
+                <div className="group relative shrink-0 overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-lg scroll-snap-align-start min-w-[380px] max-w-[380px]">
               <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                  <Globe className="h-6 w-6 text-primary" />
+                <div className="flex items-center justify-center rounded-lg bg-primary/10 size-12">
+                  <Globe className="text-primary size-6" />
                 </div>
                 <h3 className="text-xl font-semibold text-foreground">
                   Web Đánh Giá Game
@@ -666,21 +666,21 @@ export default function Home() {
                   href="#"
                   className="inline-flex items-center gap-2 rounded-md bg-primary/10 px-3 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/20"
                 >
-                  <Github className="h-4 w-4" />
+                  <Github className="size-4" />
                   Code
                 </a>
                 <a
                   href="#"
                   className="inline-flex items-center gap-2 rounded-md bg-muted px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted/80"
                 >
-                  <ExternalLink className="h-4 w-4" />
+                  <ExternalLink className="size-4" />
                   Demo
                 </a>
               </div>
                 </div>
 
                 {/* Project 2: Thiết kế bảo mật 2 lớp cho SSH server */}
-                <div className="group relative min-w-[380px] max-w-[380px] shrink-0 overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-lg scroll-snap-align-start">
+                <div className="group relative shrink-0 overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-lg scroll-snap-align-start min-w-[380px] max-w-[380px]">
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                   <Shield className="h-6 w-6 text-primary" />
@@ -709,21 +709,21 @@ export default function Home() {
                   href="#"
                   className="inline-flex items-center gap-2 rounded-md bg-primary/10 px-3 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/20"
                 >
-                  <Github className="h-4 w-4" />
+                  <Github className="size-4" />
                   Code
                 </a>
                 <a
                   href="#"
                   className="inline-flex items-center gap-2 rounded-md bg-muted px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted/80"
                 >
-                  <ExternalLink className="h-4 w-4" />
+                  <ExternalLink className="size-4" />
                   Docs
                 </a>
               </div>
             </div>
 
                 {/* Project 3: Hệ thống phát hiện tấn công qua lưu lượng mạng */}
-                <div className="group relative min-w-[380px] max-w-[380px] shrink-0 overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-lg scroll-snap-align-start">
+                <div className="group relative shrink-0 overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-lg scroll-snap-align-start min-w-[380px] max-w-[380px]">
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                   <Network className="h-6 w-6 text-primary" />
@@ -754,7 +754,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-md bg-primary/10 px-3 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/20"
                 >
-                  <Github className="h-4 w-4" />
+                  <Github className="size-4" />
                   Code
                 </a>
                 <a
@@ -763,17 +763,17 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-md bg-muted px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted/80"
                 >
-                  <ExternalLink className="h-4 w-4" />
+                  <ExternalLink className="size-4" />
                   README
                 </a>
               </div>
                 </div>
 
                 {/* Project 4: Website chúc mừng sinh nhật */}
-                <div className="group relative min-w-[380px] max-w-[380px] shrink-0 overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-lg scroll-snap-align-start">
+                <div className="group relative shrink-0 overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-lg scroll-snap-align-start min-w-[380px] max-w-[380px]">
                   <div className="mb-4 flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-pink-500/10 to-rose-500/10">
-                      <Cake className="h-6 w-6 text-pink-500" />
+                    <div className="flex items-center justify-center rounded-lg bg-gradient-to-br from-pink-500/10 to-rose-500/10 size-12">
+                      <Cake className="text-pink-500 size-6" />
                     </div>
                     <h3 className="text-xl font-semibold text-foreground">
                       Website Chúc Mừng Sinh Nhật
@@ -802,14 +802,14 @@ export default function Home() {
                       href="#"
                       className="inline-flex items-center gap-2 rounded-md bg-pink-500/10 px-3 py-2 text-sm font-medium text-pink-600 transition-colors hover:bg-pink-500/20"
                     >
-                      <Github className="h-4 w-4" />
+                      <Github className="size-4" />
                       Code
                     </a>
                     <a
                       href="#"
                       className="inline-flex items-center gap-2 rounded-md bg-muted px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted/80"
                     >
-                      <ExternalLink className="h-4 w-4" />
+                      <ExternalLink className="size-4" />
                       Demo
                     </a>
                   </div>
@@ -830,19 +830,19 @@ export default function Home() {
             <p className="mb-8 text-lg text-muted-foreground">
               Đọc các bài viết về Java, JavaScript và phát triển web
             </p>
-            <Link
-              href="/blog"
-              className={cn(
+          <Link
+            href="/blog"
+            className={cn(
                 buttonVariants({ size: "lg" }),
                 "bg-primary text-primary-foreground shadow-lg transition-all hover:shadow-xl hover:scale-105",
-              )}
-            >
+            )}
+          >
               <BookOpen className="mr-2 h-5 w-5" />
               Xem Tất Cả Bài Viết
-            </Link>
-          </div>
+          </Link>
         </div>
-      </section>
+      </div>
+    </section>
     </div>
   );
 }

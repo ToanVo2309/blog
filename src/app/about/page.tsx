@@ -57,10 +57,10 @@ export default function AboutPage() {
                   rel="noreferrer"
                   target="_blank"
                   className={cn(
-                    "group flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card transition-all hover:border-primary hover:bg-primary/10 hover:shadow-lg",
+                    "group flex items-center justify-center rounded-full border border-border bg-card transition-all hover:border-primary hover:bg-primary/10 hover:shadow-lg size-11",
                   )}
                 >
-                  <social.icon className="h-5 w-5 text-foreground transition-colors group-hover:text-primary" />
+                  <social.icon className="text-foreground transition-colors group-hover:text-primary size-5" />
                   <span className="sr-only">{social.label}</span>
                 </Link>
               ))}
@@ -78,7 +78,7 @@ export default function AboutPage() {
                     href={`mailto:${siteConfig.contact.email}`}
                     className="flex items-center gap-3 text-foreground transition-colors hover:text-primary"
                   >
-                    <Mail className="h-5 w-5" />
+                    <Mail className="size-5" />
                     <span className="text-sm sm:text-base">{siteConfig.contact.email}</span>
                   </a>
                 </div>
@@ -90,7 +90,7 @@ export default function AboutPage() {
                     href={`tel:${siteConfig.contact.phone}`}
                     className="flex items-center gap-3 text-foreground transition-colors hover:text-primary"
                   >
-                    <Phone className="h-5 w-5" />
+                    <Phone className="size-5" />
                     <span className="text-sm sm:text-base">{siteConfig.contact.phone}</span>
                   </a>
                 </div>
@@ -146,8 +146,8 @@ export default function AboutPage() {
             {/* Chơi game */}
             <div className="group relative overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-lg hover:scale-105">
               <div className="mb-4 flex flex-col items-center text-center">
-                <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-purple-500/10 to-pink-500/10 transition-transform group-hover:scale-110">
-                  <Gamepad2 className="h-8 w-8 text-purple-500" />
+                <div className="mb-3 flex items-center justify-center rounded-full bg-gradient-to-br from-purple-500/10 to-pink-500/10 transition-transform group-hover:scale-110 size-16">
+                  <Gamepad2 className="text-purple-500 size-8" />
                 </div>
                 <h3 className="text-lg font-semibold text-foreground">
                   Chơi Game
@@ -158,8 +158,8 @@ export default function AboutPage() {
             {/* Xem phim */}
             <div className="group relative overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-lg hover:scale-105">
               <div className="mb-4 flex flex-col items-center text-center">
-                <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-500/10 to-cyan-500/10 transition-transform group-hover:scale-110">
-                  <Film className="h-8 w-8 text-blue-500" />
+                <div className="mb-3 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500/10 to-cyan-500/10 transition-transform group-hover:scale-110 size-16">
+                  <Film className="text-blue-500 size-8" />
                 </div>
                 <h3 className="text-lg font-semibold text-foreground">
                   Xem Phim
@@ -170,8 +170,8 @@ export default function AboutPage() {
             {/* Nghe nhạc */}
             <div className="group relative overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-lg hover:scale-105">
               <div className="mb-4 flex flex-col items-center text-center">
-                <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-green-500/10 to-emerald-500/10 transition-transform group-hover:scale-110">
-                  <Music className="h-8 w-8 text-green-500" />
+                <div className="mb-3 flex items-center justify-center rounded-full bg-gradient-to-br from-green-500/10 to-emerald-500/10 transition-transform group-hover:scale-110 size-16">
+                  <Music className="text-green-500 size-8" />
                 </div>
                 <h3 className="text-lg font-semibold text-foreground">
                   Nghe Nhạc
@@ -182,8 +182,8 @@ export default function AboutPage() {
             {/* Đi phượt */}
             <div className="group relative overflow-hidden rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-lg hover:scale-105">
               <div className="mb-4 flex flex-col items-center text-center">
-                <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-orange-500/10 to-red-500/10 transition-transform group-hover:scale-110">
-                  <MapPin className="h-8 w-8 text-orange-500" />
+                <div className="mb-3 flex items-center justify-center rounded-full bg-gradient-to-br from-orange-500/10 to-red-500/10 transition-transform group-hover:scale-110 size-16">
+                  <MapPin className="text-orange-500 size-8" />
                 </div>
                 <h3 className="text-lg font-semibold text-foreground">
                   Đi Phượt
