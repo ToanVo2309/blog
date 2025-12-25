@@ -1,83 +1,124 @@
-# MDX Static Blog Template
+# Bảo Toàn Dev - Personal Blog
 
-MDX Blog Template is a simple implementation of a markdown static blog. Built with Next.js 14 and velite js.
+Blog cá nhân chia sẻ kiến thức về Java, JavaScript và phát triển web. Được xây dựng với Next.js 14 và MDX.
 
-<img src="screenshot/mdx-blog-template.jpg" alt="Dashboard" width="100%">
+## Giới thiệu
 
-## Table of Contents
+Blog Bảo Toàn Dev là nơi chia sẻ những kiến thức, kinh nghiệm lập trình về Java và JavaScript trong quá trình học tập. Blog được thiết kế với giao diện hiện đại, tối giản và dễ đọc.
 
-- [Features](#features)
+## Tính năng
 
-- [Used Technologies](#used-technologies)
+- ✨ **MDX Components** - Viết blog với MDX, hỗ trợ JSX trong Markdown
+- 🎨 **Responsive Design** - Thiết kế responsive với Tailwind CSS và shadcn/ui
+- 📝 **Syntax Highlighting** - Highlight code với theme đẹp mắt
+- 🎯 **Personal Portfolio** - Trang chủ với profile, skills, certifications và projects
+- 📱 **Mobile Friendly** - Tối ưu cho mọi thiết bị
 
-- [Run Locally](#run-locally)
+## Công nghệ sử dụng
 
-## Features
+- **Next.js 14** - React framework với Static Site Generation (SSG)
+- **MDX** - Markdown với JSX support
+- **Velite** - Type-safe data layer từ Markdown/MDX
+- **Tailwind CSS** - Utility-first CSS framework
+- **shadcn/ui** - Beautiful UI components
+- **TypeScript** - Type safety
 
-- MDX Components
+## Cài đặt và chạy
 
-- Responsive design built using `shadcn/ui` and `tailwindcss`
+### Yêu cầu
 
-- Syntax Highlighting of code.
+- Node.js 18+ 
+- npm, yarn hoặc pnpm
 
-## Used Technologies
+### Các bước
 
-- `Next.js`: Harness the power of Next.js, leveraging its static site generation (SSG) capabilities to create a user interface.
-
-- `shadcn/ui`: Enhance your app's visual and interactive elements with components from shadcn/ui. These beautifully designed components can be seamlessly integrated into your application, offering accessibility, customizability, and open-source goodness.
-
-- `Tailwind CSS`: Employ Tailwind CSS for efficient styling, enabling rapid development through its utility-first approach and streamlined design workflow.
-
-- `Markdown`: MDX lets you use JSX in your markdown content. You can import components, such as interactive charts or alerts, and embed them within your content.
-
-- `Velite`: Velite is a tool for building type-safe data layer, turn Markdown / MDX, YAML, JSON, or other files into app's data layer with Zod schema.
-
-## Run Locally
-
-To get a copy of MDX Blog Template up and running on your local machine, follow these steps:
-
-1. **Clone the repository**:
+1. **Clone repository:**
 
    ```bash
-   git clone https://github.com/devbertskie/next-mdx-blog.git
+   git clone https://github.com/ToanVo2309/bao-toan-dev-blog.git
+   cd bao-toan-dev-blog
    ```
 
-   After successful cloned. Head over to the project directory
-
-   ```bash
-   cd next-mdx-blog
-   ```
-
-2. **Install Dependencies**:
-
-   Navigate into the project directory and install the required dependencies:
+2. **Cài đặt dependencies:**
 
    ```bash
    npm install
+   # hoặc
+   yarn install
+   # hoặc
+   pnpm install
    ```
 
-3. **Run the Development Server**:
-
-   Start the app in development mode with the following command:
+3. **Chạy development server:**
 
    ```bash
    npm run dev
+   # hoặc
+   yarn dev
+   # hoặc
+   pnpm dev
    ```
 
-   Head over to your browser and access the `localhost:3000`
+   Mở trình duyệt và truy cập [http://localhost:3000](http://localhost:3000)
 
-4. **Build the App**:
-
-   To build the app, run the following command:
+4. **Build cho production:**
 
    ```bash
    npm run build
+   npm start
    ```
 
+## Thêm bài viết mới
+
+Để thêm bài viết mới, tạo file `.mdx` trong thư mục `src/content/blog/`:
+
+```markdown
+---
+title: "Tiêu đề bài viết"
+description: "Mô tả ngắn gọn"
+image: "/images/blog/your-image.svg"
+date: "2024-12-20"
+author: "Bảo Toàn"
 ---
 
-- **Add New Blog Content**:
+Nội dung bài viết ở đây...
+```
 
-  To add new blog content, go to `content` folder and you can add new markdown component in `.mdx` file
+**Lưu ý:** Tên file phải dùng dấu gạch ngang (`-`) và không có khoảng trắng. Ví dụ: `java-collections-framework.mdx`
 
-  `Important`: Make sure to name the component with dash(`-`) and without space. Example: `my-example-blog.mdx`
+## Cấu trúc dự án
+
+```
+next-mdx-blog/
+├── src/
+│   ├── app/              # Next.js app router
+│   ├── components/       # React components
+│   ├── config/          # Configuration files
+│   ├── content/         # Blog posts (MDX files)
+│   ├── lib/             # Utility functions
+│   └── styles/          # Global styles
+├── public/              # Static assets
+│   ├── images/         # Images và certifications
+│   └── ...
+└── package.json
+```
+
+## Deploy
+
+Blog có thể deploy lên:
+
+- **Vercel** (khuyến nghị) - [vercel.com](https://vercel.com)
+- **Netlify** - [netlify.com](https://netlify.com)
+- **GitHub Pages** - Cần build static trước
+
+## Tác giả
+
+**Bảo Toàn** - Sinh viên năm cuối ngành Công nghệ Thông tin, chuyên ngành An ninh mạng
+
+- GitHub: [@ToanVo2309](https://github.com/ToanVo2309)
+- Facebook: [Bảo Toàn](https://www.facebook.com/bao.toan.535017/)
+- Email: toanvo3789@gmail.com
+
+## License
+
+MIT License - Xem file LICENSE để biết thêm chi tiết.
