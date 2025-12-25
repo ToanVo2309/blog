@@ -1,4 +1,3 @@
-import React from "react";
 import { Metadata } from "next";
 import PageHeader from "@/components/page-header";
 import { blogs as allBlogs } from "#site/content";

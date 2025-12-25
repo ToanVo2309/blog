@@ -2,7 +2,6 @@
 
 import React from "react";
 import { X, Download } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface CertificateModalProps {
   isOpen: boolean;

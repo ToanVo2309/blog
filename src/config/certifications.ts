@@ -1,10 +1,11 @@
 import { Award, Code, Shield } from "lucide-react";
+import type { ComponentType } from "react";
 
 export interface Certification {
   name: string;
   issuer: string;
   year: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: ComponentType<{ className?: string }>;
   file: string;
   image: string;
 }

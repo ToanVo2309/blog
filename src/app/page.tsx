@@ -2,11 +2,10 @@
 
 import { useState, useRef, useEffect } from "react";
 import { buttonVariants } from "@/components/ui/button";
-import { siteConfig } from "@/config/site";
 import { SOCIALS } from "@/constants";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Award, Code, Shield, Globe, BookOpen, GraduationCap, Briefcase, Database, Network, Lock, Brain, BarChart3, Terminal, Layers, Zap, FileText, ChevronLeft, ChevronRight, ExternalLink, Github, Cake, Heart } from "lucide-react";
+import { Award, Code, Shield, Globe, BookOpen, Network, Lock, Brain, BarChart3, Terminal, Layers, Zap, ChevronLeft, ChevronRight, ExternalLink, Github, Cake } from "lucide-react";
 import CertificateModal from "@/components/certificate-modal";
 import { certifications } from "@/config/certifications";
 
@@ -22,9 +21,6 @@ export default function Home() {
   const projectsScrollRef = useRef<HTMLDivElement>(null);
   const skillsScrollContainerRef = useRef<HTMLDivElement>(null);
   const certsScrollContainerRef = useRef<HTMLDivElement>(null);
-  const [skillsIndex, setSkillsIndex] = useState(0);
-  const [certsIndex, setCertsIndex] = useState(0);
-  const [projectsIndex, setProjectsIndex] = useState(0);
   const isScrollingSkills = useRef(false);
   const isScrollingCerts = useRef(false);
   const isScrollingProjects = useRef(false);
