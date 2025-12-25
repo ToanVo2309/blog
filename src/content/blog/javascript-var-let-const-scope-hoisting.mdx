@@ -1,0 +1,291 @@
+---
+title: "Var, Let, Const trong JavaScript: Hiểu rõ về Scope và Hoisting"
+description: "Tìm hiểu sự khác biệt giữa var, let, const: scope, hoisting, Temporal Dead Zone và best practices trong JavaScript"
+image: "/images/blog/js-var-let-const.svg"
+date: "2024-12-24"
+author: "Bảo Toàn"
+---
+
+## Giới thiệu
+
+Trong JavaScript, có ba cách để khai báo biến: `var`, `let`, và `const`. Mỗi cách có đặc điểm riêng về scope (phạm vi) và hoisting (nâng lên). Hiểu rõ sự khác biệt sẽ giúp bạn tránh được nhiều lỗi phổ biến.
+
+## Scope là gì?
+
+Scope (phạm vi) là vùng code nơi một biến có thể được truy cập. JavaScript có hai loại scope chính:
+- **Global Scope**: Biến có thể truy cập ở mọi nơi
+- **Local Scope**: Biến chỉ có thể truy cập trong một khối code cụ thể
+
+## Var - Cách khai báo cũ
+
+### Đặc điểm của var
+
+```javascript
+// var có function scope
+function example() {
+    if (true) {
+        var x = 10;
+    }
+    console.log(x); // 10 - vẫn truy cập được!
+}
+
+// var có thể khai báo lại
+var name = "Bảo Toàn";
+var name = "Minh Anh"; // Không báo lỗi
+console.log(name); // "Minh Anh"
+
+// var bị hoisting
+console.log(age); // undefined (không báo lỗi!)
+var age = 20;
+```
+
+### Vấn đề với var
+
+```javascript
+// Vấn đề 1: Leak ra ngoài block
+for (var i = 0; i < 3; i++) {
+    setTimeout(function() {
+        console.log(i); // In ra 3, 3, 3 (không phải 0, 1, 2!)
+    }, 100);
+}
+
+// Vấn đề 2: Có thể khai báo lại
+var count = 5;
+var count = 10; // Không báo lỗi, dễ gây nhầm lẫn
+```
+
+## Let - Cách khai báo hiện đại
+
+### Đặc điểm của let
+
+```javascript
+// let có block scope
+function example() {
+    if (true) {
+        let x = 10;
+    }
+    console.log(x); // ReferenceError: x is not defined
+}
+
+// let không thể khai báo lại trong cùng scope
+let name = "Bảo Toàn";
+let name = "Minh Anh"; // SyntaxError: Identifier 'name' has already been declared
+
+// let vẫn bị hoisting nhưng không khởi tạo
+console.log(age); // ReferenceError: Cannot access 'age' before initialization
+let age = 20;
+```
+
+### Ưu điểm của let
+
+```javascript
+// Giải quyết vấn đề với vòng lặp
+for (let i = 0; i < 3; i++) {
+    setTimeout(function() {
+        console.log(i); // In ra 0, 1, 2 (đúng như mong đợi!)
+    }, 100);
+}
+
+// Mỗi lần lặp tạo một biến i riêng biệt
+```
+
+### Temporal Dead Zone (TDZ)
+
+```javascript
+// TDZ: Vùng từ đầu scope đến dòng khai báo
+function tdzExample() {
+    // Đây là TDZ cho 'value'
+    console.log(value); // ReferenceError
+    
+    let value = 42; // Từ đây trở đi mới dùng được
+    console.log(value); // 42
+}
+```
+
+## Const - Hằng số
+
+### Đặc điểm của const
+
+```javascript
+// const có block scope giống let
+if (true) {
+    const PI = 3.14;
+}
+console.log(PI); // ReferenceError
+
+// const phải được khởi tạo ngay
+const name; // SyntaxError: Missing initializer
+
+// const không thể gán lại
+const age = 20;
+age = 21; // TypeError: Assignment to constant variable
+
+// const không thể khai báo lại
+const count = 5;
+const count = 10; // SyntaxError
+```
+
+### Const với đối tượng và mảng
+
+```javascript
+// const không ngăn thay đổi nội dung của object/array
+const person = {
+    name: "Bảo Toàn",
+    age: 20
+};
+
+person.age = 21; // OK - có thể thay đổi thuộc tính
+person.city = "Hà Nội"; // OK - có thể thêm thuộc tính
+// person = {}; // Error - không thể gán lại
+
+const numbers = [1, 2, 3];
+numbers.push(4); // OK - có thể thêm phần tử
+numbers[0] = 10; // OK - có thể thay đổi phần tử
+// numbers = []; // Error - không thể gán lại
+```
+
+## Hoisting - Nâng lên
+
+Hoisting là cơ chế JavaScript di chuyển khai báo lên đầu scope trước khi thực thi code.
+
+### Hoisting với var
+
+```javascript
+console.log(x); // undefined (không báo lỗi)
+var x = 5;
+console.log(x); // 5
+
+// JavaScript hiểu như thế này:
+var x; // Khai báo được nâng lên
+console.log(x); // undefined
+x = 5; // Gán giá trị
+console.log(x); // 5
+```
+
+### Hoisting với let và const
+
+```javascript
+// let và const cũng bị hoisting nhưng không khởi tạo
+console.log(y); // ReferenceError: Cannot access 'y' before initialization
+let y = 5;
+
+console.log(z); // ReferenceError: Cannot access 'z' before initialization
+const z = 10;
+```
+
+## So sánh Var, Let, và Const
+
+| Đặc điểm | var | let | const |
+|----------|-----|-----|-------|
+| **Scope** | Function | Block | Block |
+| **Hoisting** | Có, khởi tạo = undefined | Có, nhưng TDZ | Có, nhưng TDZ |
+| **Khai báo lại** | ✅ Cho phép | ❌ Không cho phép | ❌ Không cho phép |
+| **Gán lại** | ✅ Cho phép | ✅ Cho phép | ❌ Không cho phép |
+| **Phải khởi tạo** | ❌ Không bắt buộc | ❌ Không bắt buộc | ✅ Bắt buộc |
+
+## Best Practices
+
+### 1. Luôn dùng const mặc định
+
+```javascript
+// ✅ NÊN
+const name = "Bảo Toàn";
+const age = 20;
+const isStudent = true;
+
+// Chỉ dùng let khi cần thay đổi giá trị
+let counter = 0;
+counter++; // Cần thay đổi nên dùng let
+```
+
+### 2. Tránh dùng var
+
+```javascript
+// ❌ KHÔNG NÊN
+var oldVariable = "Cách cũ";
+
+// ✅ NÊN
+const newVariable = "Cách mới";
+let changeableVariable = "Có thể thay đổi";
+```
+
+### 3. Sử dụng block scope đúng cách
+
+```javascript
+// ✅ NÊN - Mỗi block có biến riêng
+function processData() {
+    if (condition) {
+        const temp = calculate();
+        // temp chỉ tồn tại trong block này
+    }
+    // temp không tồn tại ở đây
+}
+```
+
+## Ví dụ thực tế
+
+### Ví dụ 1: Vòng lặp với closure
+
+```javascript
+// ❌ Vấn đề với var
+var functions = [];
+for (var i = 0; i < 3; i++) {
+    functions.push(function() {
+        console.log(i); // Tất cả in ra 3
+    });
+}
+functions[0](); // 3
+functions[1](); // 3
+functions[2](); // 3
+
+// ✅ Giải pháp với let
+const functions = [];
+for (let i = 0; i < 3; i++) {
+    functions.push(function() {
+        console.log(i); // In ra 0, 1, 2
+    });
+}
+functions[0](); // 0
+functions[1](); // 1
+functions[2](); // 2
+```
+
+### Ví dụ 2: Khai báo trong switch
+
+```javascript
+// ❌ Vấn đề với var
+switch (type) {
+    case 'A':
+        var result = 'Type A';
+        break;
+    case 'B':
+        var result = 'Type B'; // Có thể ghi đè case A
+        break;
+}
+
+// ✅ Giải pháp với let/const
+switch (type) {
+    case 'A': {
+        const result = 'Type A'; // Block scope riêng
+        break;
+    }
+    case 'B': {
+        const result = 'Type B'; // Block scope riêng
+        break;
+    }
+}
+```
+
+## Kết luận
+
+- **var**: Cách cũ, tránh dùng trong code mới
+- **let**: Dùng cho biến cần thay đổi giá trị
+- **const**: Dùng mặc định cho mọi biến
+
+Hiểu rõ scope và hoisting giúp bạn:
+- Tránh lỗi phổ biến
+- Viết code rõ ràng hơn
+- Debug dễ dàng hơn
+
+Hãy luôn ưu tiên `const`, chỉ dùng `let` khi cần, và tránh `var`!
+

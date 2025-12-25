@@ -10,8 +10,8 @@ const lexend = Lexend({ subsets: ["latin"], variable: "--font-lexend" });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Mdx Blog Template",
-    default: "Mdx Blog Template",
+    template: "%s | Bảo Toàn Dev",
+    default: "Bảo Toàn Dev - Blog chia sẻ kiến thức Java & JavaScript",
   },
 };
 
@@ -26,7 +26,7 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="vi" className="light">
       <body
         className={cn(
           "min-h-screen antialiased font-lexend bg-background",

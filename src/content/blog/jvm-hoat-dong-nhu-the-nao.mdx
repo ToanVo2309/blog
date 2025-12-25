@@ -1,0 +1,268 @@
+---
+title: "JVM hoạt động như thế nào? Tìm hiểu về Java Virtual Machine"
+description: "Khám phá JVM: Class Loader, Runtime Data Areas, Execution Engine, Garbage Collector và cách Java code được biên dịch và chạy"
+image: "/images/blog/jvm.svg"
+date: "2024-12-23"
+author: "Bảo Toàn"
+---
+
+## Giới thiệu
+
+Khi bạn chạy một chương trình Java, code của bạn không chạy trực tiếp trên máy tính. Thay vào đó, nó chạy trên một môi trường đặc biệt gọi là JVM (Java Virtual Machine). Trong bài viết này, chúng ta sẽ tìm hiểu JVM hoạt động như thế nào.
+
+## JVM là gì?
+
+JVM (Java Virtual Machine) là một máy ảo cho phép chạy các chương trình Java. Nó là phần trung gian giữa code Java và phần cứng máy tính.
+
+### Tại sao cần JVM?
+
+Java được thiết kế với khẩu hiệu "Write Once, Run Anywhere" (Viết một lần, chạy mọi nơi). Điều này có nghĩa là:
+- Bạn viết code Java một lần
+- Code được biên dịch thành bytecode
+- Bytecode có thể chạy trên bất kỳ máy nào có JVM
+
+## Quá trình biên dịch và chạy Java
+
+### 1. Viết code Java
+
+```java
+// HelloWorld.java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Xin chào từ JVM!");
+    }
+}
+```
+
+### 2. Biên dịch thành Bytecode
+
+Khi bạn chạy `javac HelloWorld.java`, trình biên dịch Java sẽ:
+- Đọc file `.java`
+- Kiểm tra cú pháp
+- Tạo file `.class` chứa bytecode
+
+```bash
+javac HelloWorld.java
+# Tạo ra file HelloWorld.class
+```
+
+### 3. JVM chạy Bytecode
+
+Khi bạn chạy `java HelloWorld`, JVM sẽ:
+- Đọc file `.class`
+- Nạp bytecode vào bộ nhớ
+- Thực thi từng lệnh
+
+```bash
+java HelloWorld
+# Output: Xin chào từ JVM!
+```
+
+## Các thành phần chính của JVM
+
+### 1. Class Loader (Bộ nạp lớp)
+
+Class Loader có nhiệm vụ nạp các file `.class` vào bộ nhớ.
+
+```java
+public class ClassLoaderExample {
+    public static void main(String[] args) {
+        // Lấy ClassLoader hiện tại
+        ClassLoader loader = ClassLoaderExample.class.getClassLoader();
+        System.out.println("ClassLoader: " + loader);
+        
+        // Lấy ClassLoader của String (từ Bootstrap ClassLoader)
+        ClassLoader stringLoader = String.class.getClassLoader();
+        System.out.println("String ClassLoader: " + stringLoader); // null = Bootstrap
+    }
+}
+```
+
+**Các loại Class Loader:**
+- **Bootstrap ClassLoader**: Nạp các class cốt lõi (java.lang, java.util...)
+- **Extension ClassLoader**: Nạp các class từ thư mục extensions
+- **Application ClassLoader**: Nạp các class từ classpath của ứng dụng
+
+### 2. Runtime Data Areas (Vùng dữ liệu runtime)
+
+JVM chia bộ nhớ thành các vùng khác nhau:
+
+#### Method Area (Vùng phương thức)
+Lưu trữ thông tin về class, method, biến static.
+
+```java
+public class MethodAreaExample {
+    // Biến static được lưu trong Method Area
+    static String className = "MethodAreaExample";
+    
+    public static void main(String[] args) {
+        System.out.println("Class name: " + className);
+    }
+}
+```
+
+#### Heap (Đống)
+Lưu trữ các đối tượng (objects) được tạo trong chương trình.
+
+```java
+public class HeapExample {
+    public static void main(String[] args) {
+        // Các đối tượng này được lưu trong Heap
+        String str1 = new String("Hello");
+        String str2 = new String("World");
+        Integer number = new Integer(100);
+        
+        // Garbage Collector sẽ dọn dẹp các đối tượng không còn được sử dụng
+    }
+}
+```
+
+**Heap được chia thành:**
+- **Young Generation**: Nơi các đối tượng mới được tạo
+  - Eden Space
+  - Survivor Space (S0, S1)
+- **Old Generation**: Nơi các đối tượng sống lâu được chuyển đến
+
+#### Stack (Ngăn xếp)
+Lưu trữ các biến local và method calls.
+
+```java
+public class StackExample {
+    public static void main(String[] args) {
+        int a = 10;  // Biến local trong stack frame của main()
+        int b = 20;
+        int result = add(a, b);  // Tạo stack frame mới cho add()
+        System.out.println(result);
+    }
+    
+    public static int add(int x, int y) {
+        // x, y là biến local trong stack frame của add()
+        return x + y;
+    }
+}
+```
+
+Mỗi thread có một stack riêng. Mỗi method call tạo một "stack frame" chứa:
+- Biến local
+- Tham số
+- Return address
+- Reference đến đối tượng trong Heap
+
+#### Program Counter (PC) Register
+Lưu địa chỉ của lệnh đang được thực thi.
+
+#### Native Method Stack
+Dành cho các native methods (code viết bằng C/C++).
+
+### 3. Execution Engine (Bộ thực thi)
+
+Execution Engine thực thi bytecode. Nó bao gồm:
+
+#### Interpreter (Trình thông dịch)
+Đọc và thực thi bytecode từng dòng một.
+
+#### JIT Compiler (Just-In-Time Compiler)
+Biên dịch bytecode thành machine code khi cần thiết để tăng tốc độ.
+
+**Cách hoạt động:**
+1. Lần đầu: Interpreter thực thi bytecode (chậm)
+2. Sau nhiều lần: JIT Compiler biên dịch thành machine code (nhanh)
+3. Lần sau: Chạy machine code đã biên dịch (rất nhanh)
+
+### 4. Garbage Collector (Bộ thu gom rác)
+
+Garbage Collector tự động dọn dẹp các đối tượng không còn được sử dụng.
+
+```java
+public class GarbageCollectionExample {
+    public static void main(String[] args) {
+        // Tạo đối tượng
+        String obj1 = new String("Object 1");
+        String obj2 = new String("Object 2");
+        
+        // obj1 không còn được tham chiếu
+        obj1 = null;
+        
+        // Garbage Collector có thể dọn dẹp obj1 bất cứ lúc nào
+        // obj2 vẫn còn được sử dụng nên chưa bị dọn
+        
+        // Gợi ý cho GC chạy (không đảm bảo)
+        System.gc();
+    }
+}
+```
+
+**Các loại Garbage Collector:**
+- **Serial GC**: Đơn giản, phù hợp ứng dụng nhỏ
+- **Parallel GC**: Sử dụng nhiều thread, nhanh hơn
+- **G1 GC**: Tối ưu cho ứng dụng lớn
+- **ZGC**: Cho ứng dụng cần độ trễ thấp
+
+## Ví dụ minh họa quá trình
+
+```java
+public class JVMProcessDemo {
+    // Biến static -> Method Area
+    static int classVariable = 100;
+    
+    public static void main(String[] args) {
+        // Biến local -> Stack (stack frame của main)
+        int localVar = 50;
+        
+        // Đối tượng mới -> Heap
+        JVMProcessDemo obj = new JVMProcessDemo();
+        
+        // Gọi method -> Tạo stack frame mới
+        obj.processData(localVar);
+    }
+    
+    public void processData(int param) {
+        // param -> Stack (stack frame của processData)
+        // this -> Reference đến obj trong Heap
+        
+        // Đối tượng mới -> Heap
+        String result = new String("Processed: " + param);
+        System.out.println(result);
+    }
+}
+```
+
+**Quá trình thực thi:**
+1. Class Loader nạp `JVMProcessDemo.class`
+2. Method Area lưu thông tin class và `classVariable`
+3. Stack tạo frame cho `main()`, lưu `localVar`
+4. Heap tạo đối tượng `obj`
+5. Stack tạo frame mới cho `processData()`
+6. Heap tạo đối tượng `result`
+7. Garbage Collector dọn dẹp khi không cần
+
+## Tối ưu hóa JVM
+
+### JVM Flags phổ biến
+
+```bash
+# Đặt kích thước heap
+java -Xmx512m -Xms256m MyApp
+
+# Chọn Garbage Collector
+java -XX:+UseG1GC MyApp
+
+# In thông tin GC
+java -XX:+PrintGCDetails MyApp
+```
+
+## Kết luận
+
+JVM là trái tim của Java, cho phép:
+- **Tính di động**: Code chạy trên mọi nền tảng
+- **Quản lý bộ nhớ tự động**: Garbage Collector
+- **Tối ưu hóa**: JIT Compiler
+- **An toàn**: Kiểm tra bytecode trước khi chạy
+
+Hiểu JVM giúp bạn:
+- Viết code hiệu quả hơn
+- Debug tốt hơn
+- Tối ưu hiệu suất ứng dụng
+
+Hãy tiếp tục khám phá để hiểu sâu hơn về JVM!
+

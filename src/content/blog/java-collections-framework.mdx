@@ -1,0 +1,305 @@
+---
+title: "Java Collections Framework: Hướng dẫn sử dụng ArrayList và HashMap"
+description: "Tìm hiểu về Java Collections Framework: ArrayList và HashMap với các ví dụ thực tế về quản lý danh sách và tra cứu key-value"
+image: "/images/blog/java-collections.svg"
+date: "2024-12-22"
+author: "Bảo Toàn"
+---
+
+## Giới thiệu
+
+Java Collections Framework là một trong những phần quan trọng nhất của Java. Nó cung cấp các cấu trúc dữ liệu sẵn có để lưu trữ và quản lý nhóm các đối tượng. Trong bài viết này, chúng ta sẽ tìm hiểu về ArrayList và HashMap - hai collection được sử dụng phổ biến nhất.
+
+## Collections Framework là gì?
+
+Collections Framework là một kiến trúc thống nhất để biểu diễn và thao tác với các collection (tập hợp). Nó bao gồm:
+- **Interfaces**: Định nghĩa các contract
+- **Implementations**: Các class cụ thể
+- **Algorithms**: Các phương thức để tìm kiếm, sắp xếp
+
+## ArrayList - Danh sách động
+
+ArrayList là một mảng động có thể tự động mở rộng kích thước.
+
+### Tạo và sử dụng ArrayList cơ bản
+
+```java
+import java.util.ArrayList;
+
+public class ArrayListExample {
+    public static void main(String[] args) {
+        // Tạo ArrayList
+        ArrayList<String> fruits = new ArrayList<>();
+        
+        // Thêm phần tử
+        fruits.add("Táo");
+        fruits.add("Chuối");
+        fruits.add("Cam");
+        fruits.add("Nho");
+        
+        // In ra danh sách
+        System.out.println("Danh sách trái cây: " + fruits);
+        
+        // Lấy phần tử theo index
+        System.out.println("Phần tử đầu tiên: " + fruits.get(0));
+        
+        // Kích thước ArrayList
+        System.out.println("Số lượng: " + fruits.size());
+    }
+}
+```
+
+### Các thao tác phổ biến với ArrayList
+
+```java
+import java.util.ArrayList;
+
+public class ArrayListOperations {
+    public static void main(String[] args) {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        
+        // Thêm phần tử
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+        numbers.add(40);
+        numbers.add(50);
+        
+        // Thêm vào vị trí cụ thể
+        numbers.add(2, 25); // Thêm 25 vào vị trí index 2
+        
+        // Xóa phần tử
+        numbers.remove(0); // Xóa phần tử ở index 0
+        numbers.remove(Integer.valueOf(30)); // Xóa phần tử có giá trị 30
+        
+        // Kiểm tra tồn tại
+        if (numbers.contains(25)) {
+            System.out.println("Có số 25 trong danh sách");
+        }
+        
+        // Tìm vị trí
+        int index = numbers.indexOf(40);
+        System.out.println("Số 40 ở vị trí: " + index);
+        
+        // Duyệt qua ArrayList
+        System.out.println("\nDuyệt bằng for-each:");
+        for (Integer num : numbers) {
+            System.out.println(num);
+        }
+        
+        System.out.println("\nDuyệt bằng for thông thường:");
+        for (int i = 0; i < numbers.size(); i++) {
+            System.out.println("Index " + i + ": " + numbers.get(i));
+        }
+    }
+}
+```
+
+### Ví dụ thực tế: Quản lý danh sách sinh viên
+
+```java
+import java.util.ArrayList;
+
+class Student {
+    private String name;
+    private int age;
+    
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    public String getName() { return name; }
+    public int getAge() { return age; }
+    
+    @Override
+    public String toString() {
+        return name + " (" + age + " tuổi)";
+    }
+}
+
+public class StudentManager {
+    public static void main(String[] args) {
+        ArrayList<Student> students = new ArrayList<>();
+        
+        // Thêm sinh viên
+        students.add(new Student("Bảo Toàn", 20));
+        students.add(new Student("Minh Anh", 21));
+        students.add(new Student("Văn Đức", 19));
+        
+        // Hiển thị danh sách
+        System.out.println("Danh sách sinh viên:");
+        for (Student student : students) {
+            System.out.println("- " + student);
+        }
+        
+        // Tìm sinh viên
+        Student found = findStudent(students, "Bảo Toàn");
+        if (found != null) {
+            System.out.println("\nTìm thấy: " + found);
+        }
+        
+        // Xóa sinh viên
+        students.removeIf(s -> s.getName().equals("Minh Anh"));
+        System.out.println("\nSau khi xóa Minh Anh:");
+        students.forEach(s -> System.out.println("- " + s));
+    }
+    
+    public static Student findStudent(ArrayList<Student> students, String name) {
+        for (Student student : students) {
+            if (student.getName().equals(name)) {
+                return student;
+            }
+        }
+        return null;
+    }
+}
+```
+
+## HashMap - Cấu trúc dữ liệu Key-Value
+
+HashMap lưu trữ dữ liệu dưới dạng cặp key-value, cho phép truy cập nhanh chóng.
+
+### Tạo và sử dụng HashMap cơ bản
+
+```java
+import java.util.HashMap;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        // Tạo HashMap
+        HashMap<String, Integer> scores = new HashMap<>();
+        
+        // Thêm cặp key-value
+        scores.put("Bảo Toàn", 95);
+        scores.put("Minh Anh", 88);
+        scores.put("Văn Đức", 92);
+        scores.put("Thảo Linh", 90);
+        
+        // Lấy giá trị theo key
+        int baoToanScore = scores.get("Bảo Toàn");
+        System.out.println("Điểm của Bảo Toàn: " + baoToanScore);
+        
+        // Kiểm tra key tồn tại
+        if (scores.containsKey("Minh Anh")) {
+            System.out.println("Có điểm của Minh Anh");
+        }
+        
+        // Kiểm tra value tồn tại
+        if (scores.containsValue(95)) {
+            System.out.println("Có người đạt 95 điểm");
+        }
+        
+        // Kích thước
+        System.out.println("Số lượng: " + scores.size());
+    }
+}
+```
+
+### Các thao tác với HashMap
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class HashMapOperations {
+    public static void main(String[] args) {
+        HashMap<String, String> contacts = new HashMap<>();
+        
+        // Thêm contact
+        contacts.put("Bảo Toàn", "0901234567");
+        contacts.put("Minh Anh", "0912345678");
+        contacts.put("Văn Đức", "0923456789");
+        
+        // Cập nhật giá trị
+        contacts.put("Bảo Toàn", "0901111111"); // Ghi đè số cũ
+        
+        // Xóa
+        contacts.remove("Văn Đức");
+        
+        // Lấy giá trị an toàn (không throw exception nếu key không tồn tại)
+        String phone = contacts.getOrDefault("Người lạ", "Không tìm thấy");
+        System.out.println("Số điện thoại: " + phone);
+        
+        // Duyệt qua HashMap
+        System.out.println("\nDanh sách liên hệ:");
+        for (Map.Entry<String, String> entry : contacts.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+        
+        // Chỉ duyệt keys
+        System.out.println("\nDanh sách tên:");
+        for (String name : contacts.keySet()) {
+            System.out.println("- " + name);
+        }
+        
+        // Chỉ duyệt values
+        System.out.println("\nDanh sách số điện thoại:");
+        for (String phoneNumber : contacts.values()) {
+            System.out.println("- " + phoneNumber);
+        }
+    }
+}
+```
+
+### Ví dụ thực tế: Đếm tần suất từ
+
+```java
+import java.util.HashMap;
+
+public class WordCounter {
+    public static void main(String[] args) {
+        String text = "Java là ngôn ngữ lập trình Java rất phổ biến Java";
+        String[] words = text.split(" ");
+        
+        HashMap<String, Integer> wordCount = new HashMap<>();
+        
+        // Đếm tần suất
+        for (String word : words) {
+            // Nếu từ đã tồn tại, tăng count lên 1
+            // Nếu chưa tồn tại, đặt count = 1
+            wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
+        }
+        
+        // Hiển thị kết quả
+        System.out.println("Tần suất các từ:");
+        for (String word : wordCount.keySet()) {
+            System.out.println(word + ": " + wordCount.get(word) + " lần");
+        }
+    }
+}
+```
+
+## So sánh ArrayList và HashMap
+
+| Đặc điểm | ArrayList | HashMap |
+|----------|-----------|---------|
+| **Cấu trúc** | Danh sách tuần tự | Key-Value pairs |
+| **Truy cập** | Theo index | Theo key |
+| **Thứ tự** | Giữ nguyên thứ tự | Không đảm bảo thứ tự |
+| **Trùng lặp** | Cho phép | Key không trùng, value có thể trùng |
+| **Hiệu suất** | O(1) truy cập theo index | O(1) truy cập theo key (trung bình) |
+| **Use case** | Danh sách có thứ tự | Tra cứu nhanh theo key |
+
+## Khi nào dùng gì?
+
+### Dùng ArrayList khi:
+- Cần danh sách có thứ tự
+- Cần truy cập theo index
+- Cần duyệt tuần tự
+- Ví dụ: Danh sách sinh viên, lịch sử giao dịch
+
+### Dùng HashMap khi:
+- Cần tra cứu nhanh theo key
+- Không quan tâm thứ tự
+- Cần ánh xạ key-value
+- Ví dụ: Từ điển, cache, đếm tần suất
+
+## Kết luận
+
+ArrayList và HashMap là hai công cụ mạnh mẽ trong Java Collections Framework:
+- **ArrayList**: Lý tưởng cho danh sách có thứ tự
+- **HashMap**: Hoàn hảo cho tra cứu nhanh theo key
+
+Hiểu rõ khi nào dùng cái gì sẽ giúp bạn viết code hiệu quả hơn. Hãy thực hành nhiều để thành thạo!
+

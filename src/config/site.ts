@@ -1,14 +1,17 @@
 import authorAvatar from "../../public/images/author/devbertskie.png";
 export const siteConfig = {
-  name: "Mdx Blog Template",
+  name: "Bảo Toàn Dev",
   description:
-    "MDX Blog Template is a simple implementation of a markdown static blog. Built with Next.js 14 and velite js.",
-  author: "devbertskie",
+    "Blog chia sẻ kiến thức về Java và JavaScript. Nơi học hỏi và chia sẻ kinh nghiệm lập trình.",
+  author: "Bảo Toàn",
   authorImage: authorAvatar,
   social: {
-    github: "https://github.com/devbertskie",
-    twitter: "https://twitter.com",
-    facebook: "https://facebook.com",
+    github: "https://github.com/ToanVo2309",
+    facebook: "https://www.facebook.com/bao.toan.535017/",
+  },
+  contact: {
+    email: "toanvo3789@gmail.com",
+    phone: "0934044503",
   },
 };
 

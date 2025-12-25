@@ -1,0 +1,402 @@
+---
+title: "DOM Manipulation cơ bản: Tương tác với HTML bằng JavaScript"
+description: "Học DOM Manipulation: chọn phần tử, thay đổi nội dung, tạo/xóa phần tử, xử lý sự kiện và best practices"
+image: "/images/blog/js-dom.svg"
+date: "2024-12-27"
+author: "Bảo Toàn"
+---
+
+## Giới thiệu
+
+DOM (Document Object Model) là cách JavaScript tương tác với HTML. Khi bạn muốn thay đổi nội dung trang web, thêm/xóa phần tử, hoặc phản ứng với sự kiện người dùng, bạn cần hiểu DOM Manipulation. Trong bài viết này, chúng ta sẽ học các thao tác DOM cơ bản nhất.
+
+## DOM là gì?
+
+DOM là một cây cấu trúc đại diện cho toàn bộ HTML document. Mỗi phần tử HTML là một "node" trong cây này.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Page</title>
+</head>
+<body>
+    <h1>Xin chào</h1>
+    <p id="intro">Đây là trang của tôi</p>
+</body>
+</html>
+```
+
+Cây DOM sẽ trông như thế này:
+```
+document
+└── html
+    ├── head
+    │   └── title
+    └── body
+        ├── h1
+        └── p (id="intro")
+```
+
+## Chọn phần tử (Selecting Elements)
+
+### getElementById
+
+```javascript
+// Chọn phần tử theo ID
+const intro = document.getElementById('intro');
+console.log(intro.textContent); // "Đây là trang của tôi"
+```
+
+### getElementsByClassName
+
+```javascript
+// Chọn tất cả phần tử có class
+const items = document.getElementsByClassName('item');
+// Trả về HTMLCollection (giống array nhưng không phải array)
+console.log(items.length);
+```
+
+### getElementsByTagName
+
+```javascript
+// Chọn tất cả phần tử theo tag name
+const paragraphs = document.getElementsByTagName('p');
+console.log(paragraphs.length);
+```
+
+### querySelector và querySelectorAll (Hiện đại)
+
+```javascript
+// querySelector: Chọn phần tử đầu tiên
+const firstItem = document.querySelector('.item');
+const intro = document.querySelector('#intro');
+
+// querySelectorAll: Chọn tất cả (trả về NodeList)
+const allItems = document.querySelectorAll('.item');
+const allParagraphs = document.querySelectorAll('p');
+```
+
+## Thay đổi nội dung
+
+### textContent và innerHTML
+
+```javascript
+// textContent: Chỉ thay đổi text
+const heading = document.querySelector('h1');
+heading.textContent = 'Xin chào từ JavaScript!';
+
+// innerHTML: Có thể thêm HTML
+const container = document.querySelector('.container');
+container.innerHTML = '<p>Đoạn văn mới</p><strong>In đậm</strong>';
+```
+
+**Lưu ý bảo mật:**
+
+```javascript
+// ❌ NGUY HIỂM - Có thể bị XSS attack
+const userInput = '<script>alert("Hack!")</script>';
+container.innerHTML = userInput; // Chạy script!
+
+// ✅ AN TOÀN
+container.textContent = userInput; // Chỉ hiển thị text
+```
+
+### Thay đổi thuộc tính
+
+```javascript
+// Thay đổi src của image
+const image = document.querySelector('img');
+image.src = 'new-image.jpg';
+image.alt = 'Mô tả ảnh mới';
+
+// Thay đổi class
+const button = document.querySelector('button');
+button.className = 'btn-primary';
+button.classList.add('active'); // Thêm class
+button.classList.remove('inactive'); // Xóa class
+button.classList.toggle('hidden'); // Bật/tắt class
+```
+
+## Tạo và thêm phần tử
+
+### createElement
+
+```javascript
+// Tạo phần tử mới
+const newParagraph = document.createElement('p');
+newParagraph.textContent = 'Đoạn văn mới được tạo';
+newParagraph.className = 'new-paragraph';
+
+// Thêm vào DOM
+const container = document.querySelector('.container');
+container.appendChild(newParagraph);
+```
+
+### Ví dụ: Tạo danh sách động
+
+```javascript
+function createListItem(text) {
+    // Tạo <li>
+    const li = document.createElement('li');
+    li.textContent = text;
+    li.className = 'list-item';
+    
+    // Tạo nút xóa
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Xóa';
+    deleteBtn.onclick = function() {
+        li.remove(); // Xóa phần tử
+    };
+    
+    li.appendChild(deleteBtn);
+    return li;
+}
+
+// Sử dụng
+const list = document.querySelector('ul');
+list.appendChild(createListItem('Mục 1'));
+list.appendChild(createListItem('Mục 2'));
+list.appendChild(createListItem('Mục 3'));
+```
+
+## Xóa phần tử
+
+```javascript
+// Cách 1: remove()
+const element = document.querySelector('.to-remove');
+element.remove();
+
+// Cách 2: removeChild()
+const parent = document.querySelector('.container');
+const child = document.querySelector('.child');
+parent.removeChild(child);
+```
+
+## Xử lý sự kiện (Event Handling)
+
+### addEventListener
+
+```javascript
+// Thêm event listener
+const button = document.querySelector('button');
+button.addEventListener('click', function() {
+    console.log('Nút đã được click!');
+});
+
+// Với arrow function
+button.addEventListener('click', () => {
+    console.log('Click với arrow function!');
+});
+```
+
+### Các sự kiện phổ biến
+
+```javascript
+const input = document.querySelector('input');
+const form = document.querySelector('form');
+
+// Click
+button.addEventListener('click', handleClick);
+
+// Input change
+input.addEventListener('input', function(e) {
+    console.log('Giá trị mới:', e.target.value);
+});
+
+// Form submit
+form.addEventListener('submit', function(e) {
+    e.preventDefault(); // Ngăn form submit mặc định
+    console.log('Form đã submit!');
+});
+
+// Key press
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        console.log('Đã nhấn Enter!');
+    }
+});
+
+// Mouse events
+const box = document.querySelector('.box');
+box.addEventListener('mouseenter', () => {
+    box.style.backgroundColor = 'blue';
+});
+box.addEventListener('mouseleave', () => {
+    box.style.backgroundColor = 'white';
+});
+```
+
+### Ví dụ: Form validation
+
+```javascript
+const form = document.querySelector('#contact-form');
+const emailInput = document.querySelector('#email');
+const errorMessage = document.querySelector('#error');
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const email = emailInput.value;
+    
+    // Kiểm tra email
+    if (!email.includes('@')) {
+        errorMessage.textContent = 'Email không hợp lệ!';
+        errorMessage.style.color = 'red';
+        return;
+    }
+    
+    // Email hợp lệ
+    errorMessage.textContent = '';
+    console.log('Form hợp lệ, gửi dữ liệu:', email);
+});
+```
+
+## Thay đổi style
+
+```javascript
+const element = document.querySelector('.box');
+
+// Thay đổi style trực tiếp
+element.style.backgroundColor = 'blue';
+element.style.color = 'white';
+element.style.padding = '20px';
+element.style.display = 'none'; // Ẩn phần tử
+element.style.display = 'block'; // Hiện phần tử
+
+// Thêm/xóa class (cách tốt hơn)
+element.classList.add('active');
+element.classList.remove('hidden');
+```
+
+## Ví dụ thực tế: Todo List
+
+```javascript
+// HTML
+// <input type="text" id="todo-input">
+// <button id="add-btn">Thêm</button>
+// <ul id="todo-list"></ul>
+
+const input = document.querySelector('#todo-input');
+const addBtn = document.querySelector('#add-btn');
+const todoList = document.querySelector('#todo-list');
+
+// Hàm thêm todo
+function addTodo() {
+    const text = input.value.trim();
+    
+    if (text === '') {
+        alert('Vui lòng nhập công việc!');
+        return;
+    }
+    
+    // Tạo phần tử li
+    const li = document.createElement('li');
+    li.className = 'todo-item';
+    
+    // Tạo span chứa text
+    const span = document.createElement('span');
+    span.textContent = text;
+    
+    // Tạo nút xóa
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Xóa';
+    deleteBtn.className = 'delete-btn';
+    deleteBtn.onclick = function() {
+        li.remove();
+    };
+    
+    // Tạo nút hoàn thành
+    const completeBtn = document.createElement('button');
+    completeBtn.textContent = 'Hoàn thành';
+    completeBtn.onclick = function() {
+        span.style.textDecoration = 'line-through';
+        span.style.color = 'gray';
+    };
+    
+    // Thêm vào DOM
+    li.appendChild(span);
+    li.appendChild(completeBtn);
+    li.appendChild(deleteBtn);
+    todoList.appendChild(li);
+    
+    // Xóa input
+    input.value = '';
+}
+
+// Event listeners
+addBtn.addEventListener('click', addTodo);
+input.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        addTodo();
+    }
+});
+```
+
+## Best Practices
+
+### 1. Cache DOM elements
+
+```javascript
+// ❌ KHÔNG NÊN - Query nhiều lần
+document.querySelector('.item').style.color = 'red';
+document.querySelector('.item').textContent = 'New';
+
+// ✅ NÊN - Query một lần
+const item = document.querySelector('.item');
+item.style.color = 'red';
+item.textContent = 'New';
+```
+
+### 2. Sử dụng event delegation
+
+```javascript
+// ❌ KHÔNG NÊN - Thêm listener cho từng phần tử
+const buttons = document.querySelectorAll('.btn');
+buttons.forEach(btn => {
+    btn.addEventListener('click', handleClick);
+});
+
+// ✅ NÊN - Thêm listener cho parent
+const container = document.querySelector('.container');
+container.addEventListener('click', function(e) {
+    if (e.target.classList.contains('btn')) {
+        handleClick(e);
+    }
+});
+```
+
+### 3. Tách logic ra functions
+
+```javascript
+// ✅ NÊN
+function createCard(title, description) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+        <h3>${title}</h3>
+        <p>${description}</p>
+    `;
+    return card;
+}
+
+const container = document.querySelector('.container');
+container.appendChild(createCard('Tiêu đề', 'Mô tả'));
+```
+
+## Kết luận
+
+DOM Manipulation cho phép bạn:
+- **Chọn phần tử**: getElementById, querySelector
+- **Thay đổi nội dung**: textContent, innerHTML
+- **Tạo/xóa phần tử**: createElement, remove
+- **Xử lý sự kiện**: addEventListener
+- **Thay đổi style**: style, classList
+
+Hiểu DOM giúp bạn:
+- Tạo trang web tương tác
+- Xây dựng ứng dụng web động
+- Phản ứng với hành động người dùng
+
+Hãy thực hành nhiều để thành thạo DOM Manipulation!
+

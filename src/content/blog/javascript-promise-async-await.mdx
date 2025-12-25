@@ -1,0 +1,414 @@
+---
+title: "Promise và Async/Await: Xử lý bất đồng bộ trong JavaScript"
+description: "Học cách xử lý bất đồng bộ với Promise và Async/Await: Promise.all, Promise.race, try-catch, và best practices"
+image: "/images/blog/js-async.svg"
+date: "2024-12-26"
+author: "Bảo Toàn"
+---
+
+## Giới thiệu
+
+JavaScript là ngôn ngữ đơn luồng (single-threaded), nhưng nó cần xử lý các tác vụ bất đồng bộ như gọi API, đọc file, hoặc đợi timer. Promise và Async/Await là hai cách hiện đại để xử lý các tác vụ này một cách dễ đọc và dễ quản lý hơn.
+
+## Vấn đề với Callback
+
+Trước khi có Promise, chúng ta dùng callback, dẫn đến "Callback Hell":
+
+```javascript
+// ❌ Callback Hell
+getData(function(data1) {
+    processData(data1, function(data2) {
+        saveData(data2, function(result) {
+            displayResult(result, function() {
+                // Quá nhiều lồng nhau!
+            });
+        });
+    });
+});
+```
+
+## Promise - Lời hứa
+
+Promise đại diện cho một giá trị có thể có trong tương lai. Nó có ba trạng thái:
+- **Pending**: Đang chờ
+- **Fulfilled**: Thành công
+- **Rejected**: Thất bại
+
+### Tạo Promise
+
+```javascript
+// Tạo Promise
+const myPromise = new Promise((resolve, reject) => {
+    // Thực hiện tác vụ bất đồng bộ
+    setTimeout(() => {
+        const success = true;
+        
+        if (success) {
+            resolve("Thành công!"); // Promise fulfilled
+        } else {
+            reject("Thất bại!"); // Promise rejected
+        }
+    }, 1000);
+});
+
+// Sử dụng Promise
+myPromise
+    .then(result => {
+        console.log(result); // "Thành công!"
+    })
+    .catch(error => {
+        console.log(error); // "Thất bại!"
+    });
+```
+
+### Ví dụ thực tế: Fetch API
+
+```javascript
+// Fetch trả về Promise
+fetch('https://api.example.com/data')
+    .then(response => {
+        // Kiểm tra response
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json(); // Trả về Promise mới
+    })
+    .then(data => {
+        console.log('Dữ liệu:', data);
+    })
+    .catch(error => {
+        console.error('Lỗi:', error);
+    });
+```
+
+### Chuỗi Promise (Promise Chaining)
+
+```javascript
+// Promise có thể được nối với nhau
+fetch('/api/user/1')
+    .then(response => response.json())
+    .then(user => {
+        console.log('User:', user);
+        return fetch(`/api/posts/${user.id}`);
+    })
+    .then(response => response.json())
+    .then(posts => {
+        console.log('Posts:', posts);
+    })
+    .catch(error => {
+        console.error('Lỗi:', error);
+    });
+```
+
+### Promise.all - Chạy song song
+
+```javascript
+// Chạy nhiều Promise cùng lúc, đợi tất cả hoàn thành
+const promise1 = fetch('/api/data1');
+const promise2 = fetch('/api/data2');
+const promise3 = fetch('/api/data3');
+
+Promise.all([promise1, promise2, promise3])
+    .then(responses => {
+        // Tất cả đã hoàn thành
+        return Promise.all(responses.map(r => r.json()));
+    })
+    .then(data => {
+        console.log('Tất cả dữ liệu:', data);
+    })
+    .catch(error => {
+        // Nếu một Promise thất bại, tất cả thất bại
+        console.error('Lỗi:', error);
+    });
+```
+
+### Promise.race - Lấy kết quả đầu tiên
+
+```javascript
+// Lấy kết quả của Promise hoàn thành đầu tiên
+const promise1 = new Promise(resolve => 
+    setTimeout(() => resolve('Promise 1'), 1000)
+);
+const promise2 = new Promise(resolve => 
+    setTimeout(() => resolve('Promise 2'), 500)
+);
+
+Promise.race([promise1, promise2])
+    .then(result => {
+        console.log(result); // "Promise 2" (nhanh hơn)
+    });
+```
+
+## Async/Await - Cú pháp đồng bộ cho code bất đồng bộ
+
+Async/Await là cách viết Promise dễ đọc hơn, giống code đồng bộ.
+
+### Cú pháp cơ bản
+
+```javascript
+// Hàm async luôn trả về Promise
+async function fetchData() {
+    try {
+        const response = await fetch('/api/data');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Lỗi:', error);
+        throw error;
+    }
+}
+
+// Sử dụng
+fetchData()
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+```
+
+### So sánh Promise và Async/Await
+
+```javascript
+// ✅ Với Promise
+function getData() {
+    return fetch('/api/data')
+        .then(response => response.json())
+        .then(data => {
+            return processData(data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+// ✅ Với Async/Await (dễ đọc hơn)
+async function getData() {
+    try {
+        const response = await fetch('/api/data');
+        const data = await response.json();
+        return processData(data);
+    } catch (error) {
+        console.error(error);
+    }
+}
+```
+
+### Xử lý lỗi với Try-Catch
+
+```javascript
+async function fetchUserData(userId) {
+    try {
+        const response = await fetch(`/api/users/${userId}`);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const user = await response.json();
+        console.log('User:', user);
+        
+        return user;
+    } catch (error) {
+        console.error('Lỗi khi lấy dữ liệu user:', error);
+        // Có thể throw lại hoặc trả về giá trị mặc định
+        throw error;
+    }
+}
+```
+
+### Chuỗi Async/Await
+
+```javascript
+// Dễ đọc hơn Promise chaining
+async function getUserPosts(userId) {
+    try {
+        // Bước 1: Lấy thông tin user
+        const userResponse = await fetch(`/api/users/${userId}`);
+        const user = await userResponse.json();
+        
+        // Bước 2: Lấy posts của user
+        const postsResponse = await fetch(`/api/users/${userId}/posts`);
+        const posts = await postsResponse.json();
+        
+        // Bước 3: Trả về kết quả
+        return {
+            user: user,
+            posts: posts
+        };
+    } catch (error) {
+        console.error('Lỗi:', error);
+        throw error;
+    }
+}
+```
+
+### Chạy song song với Async/Await
+
+```javascript
+// ❌ Chạy tuần tự (chậm)
+async function fetchSequential() {
+    const data1 = await fetch('/api/data1');
+    const data2 = await fetch('/api/data2');
+    const data3 = await fetch('/api/data3');
+    // Tổng thời gian = tổng thời gian của cả 3
+}
+
+// ✅ Chạy song song (nhanh)
+async function fetchParallel() {
+    const [data1, data2, data3] = await Promise.all([
+        fetch('/api/data1'),
+        fetch('/api/data2'),
+        fetch('/api/data3')
+    ]);
+    // Tổng thời gian = thời gian của request chậm nhất
+}
+```
+
+## Ví dụ thực tế
+
+### Ví dụ 1: Đăng nhập người dùng
+
+```javascript
+async function login(username, password) {
+    try {
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+        
+        if (!response.ok) {
+            throw new Error('Đăng nhập thất bại');
+        }
+        
+        const data = await response.json();
+        
+        // Lưu token
+        localStorage.setItem('token', data.token);
+        
+        return data.user;
+    } catch (error) {
+        console.error('Lỗi đăng nhập:', error);
+        throw error;
+    }
+}
+
+// Sử dụng
+login('baotoan', 'password123')
+    .then(user => {
+        console.log('Đăng nhập thành công:', user);
+    })
+    .catch(error => {
+        console.error('Không thể đăng nhập:', error);
+    });
+```
+
+### Ví dụ 2: Tải và hiển thị dữ liệu
+
+```javascript
+async function loadAndDisplayPosts() {
+    try {
+        // Hiển thị loading
+        showLoading();
+        
+        // Tải dữ liệu
+        const response = await fetch('/api/posts');
+        const posts = await response.json();
+        
+        // Hiển thị posts
+        displayPosts(posts);
+        
+    } catch (error) {
+        // Hiển thị lỗi
+        showError('Không thể tải bài viết: ' + error.message);
+    } finally {
+        // Luôn ẩn loading
+        hideLoading();
+    }
+}
+```
+
+### Ví dụ 3: Xử lý nhiều API calls
+
+```javascript
+async function getUserDashboard(userId) {
+    try {
+        // Chạy song song để tối ưu tốc độ
+        const [user, posts, comments, likes] = await Promise.all([
+            fetch(`/api/users/${userId}`).then(r => r.json()),
+            fetch(`/api/users/${userId}/posts`).then(r => r.json()),
+            fetch(`/api/users/${userId}/comments`).then(r => r.json()),
+            fetch(`/api/users/${userId}/likes`).then(r => r.json())
+        ]);
+        
+        return {
+            user,
+            stats: {
+                posts: posts.length,
+                comments: comments.length,
+                likes: likes.length
+            }
+        };
+    } catch (error) {
+        console.error('Lỗi khi tải dashboard:', error);
+        throw error;
+    }
+}
+```
+
+## Best Practices
+
+### 1. Luôn xử lý lỗi
+
+```javascript
+// ✅ NÊN
+async function fetchData() {
+    try {
+        const data = await fetch('/api/data');
+        return data;
+    } catch (error) {
+        // Xử lý lỗi cụ thể
+        console.error('Lỗi:', error);
+        throw error;
+    }
+}
+```
+
+### 2. Sử dụng Promise.all cho các tác vụ độc lập
+
+```javascript
+// ✅ NÊN - Chạy song song
+const [data1, data2] = await Promise.all([
+    fetch('/api/data1'),
+    fetch('/api/data2')
+]);
+```
+
+### 3. Tránh await trong vòng lặp
+
+```javascript
+// ❌ KHÔNG NÊN - Chạy tuần tự
+for (const id of ids) {
+    await fetch(`/api/data/${id}`);
+}
+
+// ✅ NÊN - Chạy song song
+await Promise.all(
+    ids.map(id => fetch(`/api/data/${id}`))
+);
+```
+
+## Kết luận
+
+- **Promise**: Cơ chế cơ bản để xử lý bất đồng bộ
+- **Async/Await**: Cú pháp dễ đọc hơn, giống code đồng bộ
+- **Promise.all**: Chạy nhiều tác vụ song song
+- **Try-Catch**: Xử lý lỗi trong async/await
+
+Hiểu rõ Promise và Async/Await giúp bạn:
+- Viết code bất đồng bộ dễ đọc hơn
+- Xử lý lỗi tốt hơn
+- Tối ưu hiệu suất với Promise.all
+
+Hãy thực hành nhiều để thành thạo xử lý bất đồng bộ!
+

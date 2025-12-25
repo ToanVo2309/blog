@@ -1,0 +1,381 @@
+---
+title: "Function vs Arrow Function: Khi nào nên dùng gì?"
+description: "So sánh function thông thường và arrow function trong JavaScript: hoisting, this binding, arguments, và khi nào nên dùng cái gì"
+image: "/images/blog/js-functions.svg"
+date: "2024-12-25"
+author: "Bảo Toàn"
+---
+
+## Giới thiệu
+
+JavaScript có hai cách chính để định nghĩa function: function thông thường và arrow function (ES6). Mỗi cách có đặc điểm riêng và phù hợp với từng tình huống khác nhau. Trong bài viết này, chúng ta sẽ tìm hiểu sự khác biệt và khi nào nên dùng cái gì.
+
+## Function thông thường
+
+### Cú pháp cơ bản
+
+```javascript
+// Function declaration
+function greet(name) {
+    return "Xin chào, " + name + "!";
+}
+
+console.log(greet("Bảo Toàn")); // "Xin chào, Bảo Toàn!"
+
+// Function expression
+const greet2 = function(name) {
+    return "Xin chào, " + name + "!";
+};
+
+console.log(greet2("Minh Anh")); // "Xin chào, Minh Anh!"
+```
+
+### Đặc điểm của function thông thường
+
+#### 1. Có thể hoisting
+
+```javascript
+// Có thể gọi trước khi khai báo
+sayHello(); // "Xin chào!"
+
+function sayHello() {
+    console.log("Xin chào!");
+}
+```
+
+#### 2. Có `this` riêng
+
+```javascript
+const person = {
+    name: "Bảo Toàn",
+    age: 20,
+    introduce: function() {
+        console.log("Tôi là " + this.name + ", " + this.age + " tuổi");
+    }
+};
+
+person.introduce(); // "Tôi là Bảo Toàn, 20 tuổi"
+```
+
+#### 3. Có `arguments` object
+
+```javascript
+function sum() {
+    let total = 0;
+    for (let i = 0; i < arguments.length; i++) {
+        total += arguments[i];
+    }
+    return total;
+}
+
+console.log(sum(1, 2, 3, 4)); // 10
+```
+
+#### 4. Có thể dùng làm constructor
+
+```javascript
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+
+const person = new Person("Bảo Toàn", 20);
+console.log(person.name); // "Bảo Toàn"
+```
+
+## Arrow Function (ES6)
+
+### Cú pháp cơ bản
+
+```javascript
+// Cú pháp đầy đủ
+const greet = (name) => {
+    return "Xin chào, " + name + "!";
+};
+
+// Rút gọn khi chỉ có một tham số
+const greet2 = name => {
+    return "Xin chào, " + name + "!";
+};
+
+// Rút gọn khi chỉ có một câu lệnh return
+const greet3 = name => "Xin chào, " + name + "!";
+
+// Không có tham số
+const sayHello = () => "Xin chào!";
+
+// Nhiều tham số
+const add = (a, b) => a + b;
+```
+
+### Đặc điểm của arrow function
+
+#### 1. Không thể hoisting
+
+```javascript
+// ❌ Lỗi
+sayHello(); // ReferenceError: Cannot access 'sayHello' before initialization
+
+const sayHello = () => {
+    console.log("Xin chào!");
+};
+```
+
+#### 2. Không có `this` riêng
+
+```javascript
+const person = {
+    name: "Bảo Toàn",
+    age: 20,
+    introduce: () => {
+        // this trỏ đến global object (window trong browser)
+        console.log("Tôi là " + this.name); // undefined
+    }
+};
+
+person.introduce(); // "Tôi là undefined"
+```
+
+**Arrow function kế thừa `this` từ scope bên ngoài:**
+
+```javascript
+const person = {
+    name: "Bảo Toàn",
+    age: 20,
+    introduce: function() {
+        // this ở đây là person
+        const innerFunction = () => {
+            // this kế thừa từ introduce()
+            console.log("Tôi là " + this.name + ", " + this.age + " tuổi");
+        };
+        innerFunction();
+    }
+};
+
+person.introduce(); // "Tôi là Bảo Toàn, 20 tuổi"
+```
+
+#### 3. Không có `arguments` object
+
+```javascript
+// ❌ Lỗi
+const sum = () => {
+    // arguments không tồn tại trong arrow function
+    console.log(arguments); // ReferenceError
+};
+
+// ✅ Giải pháp: Dùng rest parameters
+const sum2 = (...args) => {
+    let total = 0;
+    for (let num of args) {
+        total += num;
+    }
+    return total;
+};
+
+console.log(sum2(1, 2, 3, 4)); // 10
+```
+
+#### 4. Không thể dùng làm constructor
+
+```javascript
+// ❌ Lỗi
+const Person = (name, age) => {
+    this.name = name;
+    this.age = age;
+};
+
+const person = new Person("Bảo Toàn", 20); // TypeError: Person is not a constructor
+```
+
+## So sánh chi tiết
+
+| Đặc điểm | Function | Arrow Function |
+|----------|----------|----------------|
+| **Hoisting** | ✅ Có | ❌ Không |
+| **this** | Có `this` riêng | Kế thừa từ scope ngoài |
+| **arguments** | ✅ Có | ❌ Không (dùng rest params) |
+| **Constructor** | ✅ Có thể | ❌ Không thể |
+| **Cú pháp** | Dài hơn | Ngắn gọn hơn |
+
+## Khi nào dùng gì?
+
+### Dùng Arrow Function khi:
+
+#### 1. Callback functions ngắn
+
+```javascript
+// ✅ NÊN
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(n => n * 2);
+const evens = numbers.filter(n => n % 2 === 0);
+const sum = numbers.reduce((acc, n) => acc + n, 0);
+```
+
+#### 2. Cần giữ `this` từ scope ngoài
+
+```javascript
+// ✅ NÊN
+class Timer {
+    constructor() {
+        this.seconds = 0;
+    }
+    
+    start() {
+        setInterval(() => {
+            // this vẫn là instance của Timer
+            this.seconds++;
+            console.log(this.seconds);
+        }, 1000);
+    }
+}
+
+const timer = new Timer();
+timer.start();
+```
+
+#### 3. Function đơn giản, một dòng
+
+```javascript
+// ✅ NÊN
+const square = x => x * x;
+const isEven = n => n % 2 === 0;
+const greet = name => `Xin chào, ${name}!`;
+```
+
+### Dùng Function thông thường khi:
+
+#### 1. Cần `this` riêng
+
+```javascript
+// ✅ NÊN
+const button = {
+    text: "Click me",
+    click: function() {
+        // this là button
+        console.log("Clicked: " + this.text);
+    }
+};
+
+button.click(); // "Clicked: Click me"
+```
+
+#### 2. Cần dùng làm constructor
+
+```javascript
+// ✅ NÊN
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+
+const person = new Person("Bảo Toàn", 20);
+```
+
+#### 3. Cần hoisting
+
+```javascript
+// ✅ NÊN - Có thể gọi trước khi khai báo
+calculateTotal();
+
+function calculateTotal() {
+    // Logic phức tạp
+}
+```
+
+#### 4. Cần `arguments` object
+
+```javascript
+// ✅ NÊN
+function legacyFunction() {
+    // Có thể dùng arguments
+    console.log(arguments.length);
+    console.log(arguments[0]);
+}
+```
+
+## Ví dụ thực tế
+
+### Ví dụ 1: Event Handlers
+
+```javascript
+// ❌ Vấn đề với arrow function
+const button = document.querySelector('button');
+button.addEventListener('click', () => {
+    // this không phải là button
+    console.log(this); // window hoặc undefined
+});
+
+// ✅ Giải pháp với function thông thường
+button.addEventListener('click', function() {
+    // this là button
+    console.log(this); // <button>...</button>
+    this.style.backgroundColor = 'red';
+});
+```
+
+### Ví dụ 2: Object Methods
+
+```javascript
+// ❌ Vấn đề với arrow function
+const calculator = {
+    value: 0,
+    add: (num) => {
+        // this không phải là calculator
+        this.value += num; // Lỗi!
+    }
+};
+
+// ✅ Giải pháp với function thông thường
+const calculator2 = {
+    value: 0,
+    add: function(num) {
+        // this là calculator2
+        this.value += num;
+    },
+    getValue: function() {
+        return this.value;
+    }
+};
+
+calculator2.add(5);
+calculator2.add(3);
+console.log(calculator2.getValue()); // 8
+```
+
+### Ví dụ 3: Array Methods
+
+```javascript
+// ✅ Arrow function rất phù hợp
+const students = [
+    { name: "Bảo Toàn", score: 95 },
+    { name: "Minh Anh", score: 88 },
+    { name: "Văn Đức", score: 92 }
+];
+
+// Tìm sinh viên có điểm cao nhất
+const topStudent = students.reduce((top, student) => 
+    student.score > top.score ? student : top
+);
+
+// Lọc sinh viên đạt điểm >= 90
+const excellentStudents = students.filter(s => s.score >= 90);
+
+// Tính điểm trung bình
+const averageScore = students.reduce((sum, s) => sum + s.score, 0) / students.length;
+```
+
+## Best Practices
+
+1. **Mặc định dùng arrow function** cho callbacks và functions đơn giản
+2. **Dùng function thông thường** khi cần `this` riêng hoặc constructor
+3. **Nhất quán** trong codebase - chọn một style và giữ nguyên
+4. **Tránh arrow function** trong object methods nếu cần `this`
+
+## Kết luận
+
+- **Arrow Function**: Ngắn gọn, phù hợp callbacks, giữ `this` từ scope ngoài
+- **Function thông thường**: Linh hoạt hơn, có `this` riêng, có thể làm constructor
+
+Hiểu rõ sự khác biệt giúp bạn chọn đúng tool cho đúng job. Hãy thực hành nhiều để thành thạo cả hai!
+

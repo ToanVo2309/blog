@@ -13,10 +13,14 @@ export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b bg-background px-2">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <Link href="/" className="flex items-center space-x-3 text-primary">
-            <Icons.logo className="size-12" />
-            <span className="font-bold">{siteConfig.name}</span>
+        <div className="flex items-center">
+          <Link 
+            href="/" 
+            className="group relative flex items-center transition-all hover:scale-105"
+          >
+            <span className="bg-gradient-to-r from-primary via-blue-500 to-cyan-500 bg-clip-text text-2xl font-extrabold tracking-tight text-transparent drop-shadow-sm sm:text-3xl">
+              {siteConfig.name}
+            </span>
           </Link>
         </div>
         <div className="flex items-center space-x-5 md:space-x-6">

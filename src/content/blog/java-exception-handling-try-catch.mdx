@@ -1,0 +1,299 @@
+---
+title: "Xử lý ngoại lệ trong Java: Try-Catch và Best Practices"
+description: "Tìm hiểu về exception handling trong Java: Checked và Unchecked Exception, Try-Catch-Finally, Try-With-Resources, và các best practices"
+image: "/images/blog/java-exception.svg"
+date: "2024-12-21"
+author: "Bảo Toàn"
+---
+
+## Giới thiệu
+
+Khi lập trình, không phải lúc nào mọi thứ cũng diễn ra như mong đợi. File có thể không tồn tại, mảng có thể vượt quá giới hạn, hoặc kết nối mạng có thể bị lỗi. Java cung cấp cơ chế xử lý ngoại lệ (exception handling) để đối phó với những tình huống này một cách an toàn.
+
+## Exception là gì?
+
+Exception (ngoại lệ) là một sự kiện xảy ra trong quá trình thực thi chương trình làm gián đoạn luồng xử lý bình thường. Java có hệ thống phân cấp exception rõ ràng.
+
+## Phân loại Exception
+
+### 1. Checked Exception
+
+Là các exception mà compiler bắt buộc phải xử lý. Ví dụ: `IOException`, `FileNotFoundException`.
+
+```java
+import java.io.FileReader;
+import java.io.IOException;
+
+public class CheckedExceptionExample {
+    public static void main(String[] args) {
+        // Phải xử lý IOException
+        try {
+            FileReader file = new FileReader("data.txt");
+            file.read();
+            file.close();
+        } catch (IOException e) {
+            System.out.println("Lỗi đọc file: " + e.getMessage());
+        }
+    }
+}
+```
+
+### 2. Unchecked Exception (Runtime Exception)
+
+Là các exception không bắt buộc phải xử lý tại compile time. Ví dụ: `NullPointerException`, `ArrayIndexOutOfBoundsException`.
+
+```java
+public class UncheckedExceptionExample {
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 3};
+        
+        // Có thể gây ArrayIndexOutOfBoundsException
+        try {
+            System.out.println(numbers[5]); // Index không hợp lệ
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Lỗi: Chỉ số mảng không hợp lệ!");
+        }
+    }
+}
+```
+
+## Cấu trúc Try-Catch-Finally
+
+### Cú pháp cơ bản
+
+```java
+try {
+    // Code có thể gây exception
+} catch (ExceptionType e) {
+    // Xử lý exception
+} finally {
+    // Code luôn được thực thi (dù có exception hay không)
+}
+```
+
+### Ví dụ thực tế: Đọc file
+
+```java
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedReader;
+
+public class FileReaderExample {
+    public static void readFile(String filename) {
+        FileReader file = null;
+        BufferedReader reader = null;
+        
+        try {
+            file = new FileReader(filename);
+            reader = new BufferedReader(file);
+            
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            
+        } catch (IOException e) {
+            System.out.println("Lỗi khi đọc file: " + e.getMessage());
+            e.printStackTrace(); // In stack trace để debug
+            
+        } finally {
+            // Đảm bảo đóng file dù có lỗi hay không
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+                if (file != null) {
+                    file.close();
+                }
+            } catch (IOException e) {
+                System.out.println("Lỗi khi đóng file: " + e.getMessage());
+            }
+        }
+    }
+    
+    public static void main(String[] args) {
+        readFile("data.txt");
+    }
+}
+```
+
+### Try-With-Resources (Java 7+)
+
+Cách hiện đại hơn để xử lý resource, tự động đóng file:
+
+```java
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+
+public class TryWithResourcesExample {
+    public static void readFile(String filename) {
+        // Tự động đóng file khi kết thúc try block
+        try (FileReader file = new FileReader(filename);
+             BufferedReader reader = new BufferedReader(file)) {
+            
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            
+        } catch (IOException e) {
+            System.out.println("Lỗi khi đọc file: " + e.getMessage());
+        }
+        // File tự động được đóng ở đây
+    }
+}
+```
+
+## Xử lý nhiều Exception
+
+### Multiple Catch Blocks
+
+```java
+public class MultipleExceptionExample {
+    public static void divideNumbers(int a, int b) {
+        try {
+            int result = a / b;
+            System.out.println("Kết quả: " + result);
+            
+            int[] array = new int[5];
+            System.out.println(array[10]); // Có thể gây lỗi
+            
+        } catch (ArithmeticException e) {
+            System.out.println("Lỗi chia cho 0: " + e.getMessage());
+            
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Lỗi chỉ số mảng: " + e.getMessage());
+            
+        } catch (Exception e) {
+            System.out.println("Lỗi khác: " + e.getMessage());
+        }
+    }
+    
+    public static void main(String[] args) {
+        divideNumbers(10, 0);        // Gây ArithmeticException
+        divideNumbers(10, 2);        // Gây ArrayIndexOutOfBoundsException
+    }
+}
+```
+
+### Multi-Catch (Java 7+)
+
+```java
+public class MultiCatchExample {
+    public static void processData(String data) {
+        try {
+            int number = Integer.parseInt(data);
+            int result = 100 / number;
+            System.out.println("Kết quả: " + result);
+            
+        } catch (NumberFormatException | ArithmeticException e) {
+            System.out.println("Lỗi xử lý dữ liệu: " + e.getMessage());
+        }
+    }
+}
+```
+
+## Tạo Custom Exception
+
+Bạn có thể tạo exception riêng cho ứng dụng:
+
+```java
+// Custom Exception
+public class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+// Sử dụng Custom Exception
+public class Person {
+    private String name;
+    private int age;
+    
+    public Person(String name, int age) throws InvalidAgeException {
+        if (age < 0 || age > 150) {
+            throw new InvalidAgeException("Tuổi không hợp lệ: " + age);
+        }
+        this.name = name;
+        this.age = age;
+    }
+    
+    public static void main(String[] args) {
+        try {
+            Person person1 = new Person("Bảo Toàn", 20); // OK
+            Person person2 = new Person("Người khác", -5); // Sẽ throw exception
+        } catch (InvalidAgeException e) {
+            System.out.println("Lỗi: " + e.getMessage());
+        }
+    }
+}
+```
+
+## Best Practices
+
+### 1. Không bỏ qua exception
+
+```java
+// ❌ KHÔNG NÊN
+try {
+    riskyOperation();
+} catch (Exception e) {
+    // Bỏ qua - rất nguy hiểm!
+}
+
+// ✅ NÊN
+try {
+    riskyOperation();
+} catch (Exception e) {
+    logger.error("Lỗi xảy ra: ", e);
+    // Hoặc xử lý phù hợp
+}
+```
+
+### 2. Sử dụng Try-With-Resources cho file/stream
+
+```java
+// ✅ NÊN
+try (FileReader file = new FileReader("data.txt")) {
+    // Sử dụng file
+} catch (IOException e) {
+    // Xử lý lỗi
+}
+```
+
+### 3. Throw exception phù hợp
+
+```java
+// ✅ NÊN throw exception cụ thể
+public void readFile(String path) throws IOException {
+    // ...
+}
+
+// ❌ KHÔNG NÊN throw Exception chung chung
+public void readFile(String path) throws Exception {
+    // ...
+}
+```
+
+### 4. Log exception đầy đủ
+
+```java
+try {
+    processData();
+} catch (Exception e) {
+    logger.error("Lỗi khi xử lý dữ liệu", e);
+    // Không chỉ in message mà còn cả stack trace
+}
+```
+
+## Kết luận
+
+Xử lý exception đúng cách giúp:
+- **Ứng dụng ổn định hơn**: Không bị crash khi gặp lỗi
+- **Dễ debug**: Biết chính xác lỗi ở đâu
+- **Trải nghiệm người dùng tốt**: Hiển thị thông báo lỗi rõ ràng
+- **Code an toàn**: Xử lý mọi tình huống có thể xảy ra
+
+Hãy luôn xử lý exception một cách cẩn thận và đầy đủ!
+

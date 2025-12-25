@@ -1,0 +1,272 @@
+---
+title: "Lập trình hướng đối tượng trong Java: Từ khái niệm đến thực hành"
+description: "Tìm hiểu về lập trình hướng đối tượng trong Java: Encapsulation, Inheritance, Polymorphism, và Abstraction với ví dụ code thực tế"
+image: "/images/blog/java-oop.svg"
+date: "2024-12-20"
+author: "Bảo Toàn"
+---
+
+## Giới thiệu
+
+Lập trình hướng đối tượng (OOP - Object-Oriented Programming) là một trong những khái niệm quan trọng nhất trong Java. Trong bài viết này, chúng ta sẽ tìm hiểu OOP từ những khái niệm cơ bản đến cách áp dụng thực tế.
+
+## OOP là gì?
+
+Lập trình hướng đối tượng là phương pháp lập trình dựa trên khái niệm "đối tượng" (object). Mỗi đối tượng chứa dữ liệu (thuộc tính) và các phương thức (hành động) để xử lý dữ liệu đó.
+
+## Bốn nguyên lý cơ bản của OOP
+
+### 1. Encapsulation (Đóng gói)
+
+Đóng gói là việc ẩn giấu thông tin chi tiết bên trong và chỉ cho phép truy cập qua các phương thức công khai.
+
+```java
+public class Student {
+    // Thuộc tính private - không thể truy cập trực tiếp từ bên ngoài
+    private String name;
+    private int age;
+    
+    // Constructor
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    // Getter methods - cách duy nhất để truy cập dữ liệu
+    public String getName() {
+        return name;
+    }
+    
+    public int getAge() {
+        return age;
+    }
+    
+    // Setter method với validation
+    public void setAge(int age) {
+        if (age > 0 && age < 120) {
+            this.age = age;
+        } else {
+            System.out.println("Tuổi không hợp lệ!");
+        }
+    }
+}
+```
+
+**Ví dụ sử dụng:**
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Student student = new Student("Bảo Toàn", 20);
+        
+        // Có thể đọc thông tin
+        System.out.println("Tên: " + student.getName());
+        System.out.println("Tuổi: " + student.getAge());
+        
+        // Có thể thay đổi với validation
+        student.setAge(21);
+        student.setAge(-5); // Sẽ in ra "Tuổi không hợp lệ!"
+    }
+}
+```
+
+### 2. Inheritance (Kế thừa)
+
+Kế thừa cho phép một class con sử dụng lại code từ class cha.
+
+```java
+// Class cha
+public class Animal {
+    protected String name;
+    
+    public Animal(String name) {
+        this.name = name;
+    }
+    
+    public void eat() {
+        System.out.println(name + " đang ăn...");
+    }
+    
+    public void sleep() {
+        System.out.println(name + " đang ngủ...");
+    }
+}
+
+// Class con kế thừa từ Animal
+public class Dog extends Animal {
+    private String breed;
+    
+    public Dog(String name, String breed) {
+        super(name); // Gọi constructor của class cha
+        this.breed = breed;
+    }
+    
+    // Method riêng của Dog
+    public void bark() {
+        System.out.println(name + " đang sủa: Gâu gâu!");
+    }
+    
+    // Override method từ class cha
+    @Override
+    public void eat() {
+        System.out.println(name + " đang ăn thức ăn cho chó");
+    }
+}
+```
+
+**Ví dụ sử dụng:**
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Dog myDog = new Dog("Lucky", "Golden Retriever");
+        
+        myDog.eat();    // Từ class cha, nhưng đã được override
+        myDog.sleep();  // Từ class cha
+        myDog.bark();   // Method riêng của Dog
+    }
+}
+```
+
+### 3. Polymorphism (Đa hình)
+
+Đa hình cho phép các đối tượng khác nhau phản ứng khác nhau với cùng một thông điệp.
+
+```java
+// Interface hoặc abstract class
+public interface Shape {
+    double calculateArea();
+    void draw();
+}
+
+// Class Circle
+public class Circle implements Shape {
+    private double radius;
+    
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+    
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+    
+    @Override
+    public void draw() {
+        System.out.println("Vẽ hình tròn với bán kính " + radius);
+    }
+}
+
+// Class Rectangle
+public class Rectangle implements Shape {
+    private double width;
+    private double height;
+    
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+    
+    @Override
+    public double calculateArea() {
+        return width * height;
+    }
+    
+    @Override
+    public void draw() {
+        System.out.println("Vẽ hình chữ nhật " + width + "x" + height);
+    }
+}
+```
+
+**Ví dụ sử dụng đa hình:**
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Shape[] shapes = {
+            new Circle(5.0),
+            new Rectangle(4.0, 6.0),
+            new Circle(3.0)
+        };
+        
+        // Mỗi hình sẽ tự động gọi method phù hợp
+        for (Shape shape : shapes) {
+            shape.draw();
+            System.out.println("Diện tích: " + shape.calculateArea());
+            System.out.println("---");
+        }
+    }
+}
+```
+
+### 4. Abstraction (Trừu tượng hóa)
+
+Trừu tượng hóa là việc ẩn đi các chi tiết phức tạp và chỉ hiển thị những gì cần thiết.
+
+```java
+// Abstract class
+public abstract class Vehicle {
+    protected String brand;
+    protected int year;
+    
+    public Vehicle(String brand, int year) {
+        this.brand = brand;
+        this.year = year;
+    }
+    
+    // Method cụ thể
+    public void start() {
+        System.out.println(brand + " đã khởi động");
+    }
+    
+    // Abstract method - phải được implement ở class con
+    public abstract void accelerate();
+    public abstract void brake();
+}
+
+// Class con phải implement abstract methods
+public class Car extends Vehicle {
+    public Car(String brand, int year) {
+        super(brand, year);
+    }
+    
+    @Override
+    public void accelerate() {
+        System.out.println("Xe hơi tăng tốc bằng động cơ xăng");
+    }
+    
+    @Override
+    public void brake() {
+        System.out.println("Xe hơi phanh bằng hệ thống phanh đĩa");
+    }
+}
+
+public class Bicycle extends Vehicle {
+    public Bicycle(String brand, int year) {
+        super(brand, year);
+    }
+    
+    @Override
+    public void accelerate() {
+        System.out.println("Xe đạp tăng tốc bằng cách đạp");
+    }
+    
+    @Override
+    public void brake() {
+        System.out.println("Xe đạp phanh bằng tay phanh");
+    }
+}
+```
+
+## Kết luận
+
+Lập trình hướng đối tượng giúp code:
+- **Dễ bảo trì**: Code được tổ chức rõ ràng
+- **Tái sử dụng**: Có thể dùng lại code nhiều lần
+- **Linh hoạt**: Dễ mở rộng và thay đổi
+- **Dễ hiểu**: Mô phỏng thế giới thực
+
+Hãy thực hành nhiều để nắm vững các khái niệm này. Chúc bạn học tập tốt!
+

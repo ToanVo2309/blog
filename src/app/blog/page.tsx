@@ -18,7 +18,7 @@ export default function BlogPage() {
     <div className="container max-w-4xl py-6 lg:py-10">
       <PageHeader
         title="Blog"
-        description="A blog using velite. Posts are written in MDX"
+        description="Chia sẻ kiến thức về Java, JavaScript và phát triển web. Nơi học hỏi và trao đổi kinh nghiệm lập trình cho sinh viên CNTT."
       />
       <hr className="my-8" />
 
