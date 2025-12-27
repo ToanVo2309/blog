@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BÁO CÁO ĐỀ TÀI TỐT NGHIỆP - XÂY DỰNG WEBSITE BLOG CÁ NHÂN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 14pt;
+            line-height: 1.6;
+            color: #000;
+            background: #fff;
+            padding: 40px;
+            max-width: 210mm;
+            margin: 0 auto;
+        }
+        
+        @media print {
+            body {
+                padding: 20px;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+        }
+        
+        h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+        
+        h2 {
+            font-size: 16pt;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        
+        h3 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        h4 {
+            font-size: 13pt;
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+        
+        h5 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 12px;
+            margin-bottom: 6px;
+        }
+        
+        p {
+            text-align: justify;
+            margin-bottom: 12px;
+            text-indent: 1.5cm;
+        }
+        
+        .no-indent {
+            text-indent: 0;
+        }
+        
+        ul, ol {
+            margin-left: 2cm;
+            margin-bottom: 12px;
+        }
+        
+        li {
+            margin-bottom: 6px;
+        }
+        
+        strong {
+            font-weight: bold;
+        }
+        
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 11pt;
+            background: #f5f5f5;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-left: 4px solid #333;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 11pt;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1px solid #000;
+            margin: 20px 0;
+        }
+        
+        .center {
+            text-align: center;
+        }
+        
+        .title-page {
+            text-align: center;
+            margin-top: 100px;
+        }
+        
+        .title-page h1 {
+            margin-bottom: 20px;
+        }
+        
+        .title-page h2 {
+            margin-top: 10px;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="title-page">
+        <h1>BÁO CÁO ĐỀ TÀI TỐT NGHIỆP</h1>
+        <h2>XÂY DỰNG WEBSITE BLOG CÁ NHÂN SỬ DỤNG CÔNG NGHỆ STATIC SITE GENERATOR</h2>
+    </div>
+
+    <hr class="page-break">
+
+    <h2>MỞ ĐẦU</h2>
+    
+    <p class="no-indent">Ngày nay, với sự bùng nổ của công nghệ thông tin, việc xây dựng một không gian trực tuyến để thể hiện bản thân và chia sẻ kiến thức đã trở thành xu hướng không thể thiếu đối với các lập trình viên. Blog cá nhân không chỉ là công cụ để ghi chép và lưu trữ kiến thức mà còn là phương tiện hiệu quả để xây dựng thương hiệu cá nhân, thu hút cơ hội nghề nghiệp và kết nối với cộng đồng lập trình viên.</p>
+    
+    <p>Tuy nhiên, các nền tảng blog truyền thống như WordPress hay Medium thường có những hạn chế về mặt kỹ thuật: tốc độ tải trang chậm, khả năng tùy biến hạn chế, và chi phí vận hành cao. Để giải quyết những vấn đề này, công nghệ Static Site Generator (SSG) đã ra đời và ngày càng được ưa chuộng nhờ những ưu điểm vượt trội về hiệu năng, bảo mật và chi phí.</p>
+    
+    <p>Đề tài "Xây dựng Website Blog cá nhân sử dụng công nghệ Static Site Generator" được thực hiện với mục đích tạo ra một website blog hiện đại, hiệu năng cao, sử dụng các công nghệ web tiên tiến nhất hiện nay. Website được đặt tên "Bảo Toàn Dev Blog" và tập trung vào việc chia sẻ kiến thức về lập trình Java và JavaScript.</p>
+
+    <hr class="page-break">
+
+    <h2>CHƯƠNG 1: ĐẶT VẤN ĐỀ</h2>
+
+    <h3>1.1 Bối cảnh và lý do chọn đề tài</h3>
+
+    <p class="no-indent">Trong thời đại số hóa hiện nay, việc thể hiện năng lực và kinh nghiệm của một lập trình viên không chỉ dừng lại ở CV hay portfolio truyền thống. Nhiều nhà tuyển dụng và đồng nghiệp đánh giá cao những lập trình viên có blog cá nhân, nơi họ chia sẻ kiến thức, kinh nghiệm thực tế và quá trình học tập của mình. Đây được gọi là phương pháp "Learning in Public" - học tập công khai, giúp xây dựng uy tín và thương hiệu cá nhân trong cộng đồng.</p>
+
+    <p>Tuy nhiên, việc lựa chọn nền tảng để xây dựng blog không phải là điều dễ dàng:</p>
+
+    <ul>
+        <li><strong>WordPress:</strong> Mặc dù phổ biến nhưng tốc độ tải trang chậm do phải query database mỗi lần request, chi phí hosting cao, và dễ bị tấn công nếu không cập nhật thường xuyên.</li>
+        <li><strong>Medium/Blogger:</strong> Dễ sử dụng nhưng khả năng tùy biến giao diện rất hạn chế, không thể thể hiện được kỹ năng lập trình của người viết, và phụ thuộc hoàn toàn vào bên thứ ba.</li>
+        <li><strong>Custom CMS:</strong> Tốn nhiều thời gian và công sức để phát triển, cần server và database, chi phí vận hành cao.</li>
+    </ul>
+
+    <p>Giải pháp Static Site Generator (SSG) ra đời để giải quyết những vấn đề trên. SSG cho phép tạo ra các website tĩnh với tốc độ tải cực nhanh, bảo mật cao (không có database), và có thể host miễn phí trên các nền tảng như Vercel, Netlify.</p>
+
+    <p>Xuất phát từ những nhu cầu và thách thức trên, cùng với mong muốn được áp dụng và nâng cao kiến thức về React, Next.js và các công nghệ web hiện đại, em đã quyết định chọn đề tài "Xây dựng Website Blog cá nhân sử dụng công nghệ Static Site Generator" làm đề tài tốt nghiệp.</p>
+
+    <h3>1.2 Mục tiêu nghiên cứu</h3>
+
+    <h4>1.2.1 Mục tiêu chung</h4>
+
+    <p class="no-indent">Xây dựng một website blog cá nhân hoàn chỉnh, hiện đại, có hiệu năng cao, sử dụng công nghệ Static Site Generation để tối ưu tốc độ tải trang và trải nghiệm người dùng.</p>
+
+    <h4>1.2.2 Mục tiêu cụ thể</h4>
+
+    <p class="no-indent"><strong>Về mặt kỹ thuật:</strong></p>
+    <ul>
+        <li>Nắm vững và áp dụng Next.js 14 với App Router trong việc xây dựng ứng dụng web.</li>
+        <li>Hiểu rõ cơ chế hoạt động của Static Site Generation và cách Next.js thực hiện SSG.</li>
+        <li>Làm chủ việc sử dụng MDX (Markdown + JSX) để viết nội dung blog một cách linh hoạt.</li>
+        <li>Sử dụng TypeScript để đảm bảo type safety và giảm thiểu lỗi trong quá trình phát triển.</li>
+        <li>Tối ưu hóa hiệu năng website để đạt điểm cao trên các công cụ đánh giá như Google Lighthouse.</li>
+        <li>Triển khai website lên Vercel và thiết lập quy trình CI/CD tự động.</li>
+    </ul>
+
+    <p class="no-indent"><strong>Về mặt sản phẩm:</strong></p>
+    <ul>
+        <li>Xây dựng giao diện đẹp mắt, chuyên nghiệp với phong cách thiết kế tối giản (Minimalism).</li>
+        <li>Tích hợp đầy đủ các tính năng: Portfolio cá nhân, Blog, Dark/Light mode, Responsive design.</li>
+        <li>Tạo ra hệ thống nội dung phong phú về lập trình Java và JavaScript.</li>
+        <li>Đảm bảo website hoạt động tốt trên mọi thiết bị (desktop, tablet, mobile).</li>
+    </ul>
+
+    <h3>1.3 Phạm vi và giới hạn của đề tài</h3>
+
+    <h4>1.3.1 Phạm vi đối tượng sử dụng</h4>
+
+    <ul>
+        <li><strong>Người quản trị (Admin):</strong> Tác giả blog, có quyền thêm, sửa, xóa bài viết thông qua việc chỉnh sửa file MDX trong thư mục <code>src/content/blog/</code>.</li>
+        <li><strong>Người dùng (User):</strong> Độc giả truy cập website để đọc bài viết, xem thông tin cá nhân, chứng chỉ và dự án của tác giả.</li>
+    </ul>
+
+    <h4>1.3.2 Phạm vi nội dung</h4>
+
+    <ul>
+        <li><strong>Nội dung blog:</strong> Tập trung vào các chủ đề kỹ thuật về Java (OOP, Collections Framework, Exception Handling, JVM) và JavaScript (Variables, Functions, Promises, DOM Manipulation).</li>
+        <li><strong>Trang Portfolio:</strong> Bao gồm thông tin cá nhân, kỹ năng chuyên môn, chứng chỉ đạt được, dự án cá nhân đã thực hiện, và sở thích.</li>
+    </ul>
+
+    <h4>1.3.3 Công nghệ sử dụng</h4>
+
+    <ul>
+        <li><strong>Framework:</strong> Next.js 14 với App Router</li>
+        <li><strong>Ngôn ngữ:</strong> TypeScript</li>
+        <li><strong>UI Library:</strong> React 18</li>
+        <li><strong>Styling:</strong> Tailwind CSS và shadcn/ui components</li>
+        <li><strong>Content:</strong> MDX với Velite (Type-safe content layer)</li>
+        <li><strong>Build & Deploy:</strong> Next.js Static Site Generation, Vercel</li>
+    </ul>
+
+    <h3>1.4 Phương pháp nghiên cứu</h3>
+
+    <p class="no-indent">Đề tài được thực hiện theo các bước sau:</p>
+
+    <p class="no-indent"><strong>Bước 1: Nghiên cứu và khảo sát</strong></p>
+    <ul>
+        <li>Tìm hiểu về các mô hình render website (SSR, CSR, SSG).</li>
+        <li>So sánh các công cụ SSG phổ biến (Gatsby, Next.js, Hugo, Astro).</li>
+        <li>Nghiên cứu cách Next.js thực hiện Static Site Generation.</li>
+        <li>Tìm hiểu về MDX và cách tích hợp vào Next.js.</li>
+    </ul>
+
+    <p class="no-indent"><strong>Bước 2: Thiết kế hệ thống</strong></p>
+    <ul>
+        <li>Thiết kế wireframe cho các trang chính.</li>
+        <li>Xác định cấu trúc dữ liệu cho blog posts (MDX frontmatter).</li>
+        <li>Thiết kế các component tái sử dụng.</li>
+        <li>Lựa chọn color scheme và typography.</li>
+    </ul>
+
+    <p class="no-indent"><strong>Bước 3: Phát triển</strong></p>
+    <ul>
+        <li>Giai đoạn 1: Setup project, cấu hình Next.js, Tailwind CSS.</li>
+        <li>Giai đoạn 2: Xây dựng layout cơ bản (Header, Footer).</li>
+        <li>Giai đoạn 3: Implement blog system với MDX và dynamic routing.</li>
+        <li>Giai đoạn 4: Xây dựng trang Portfolio với các tính năng slider.</li>
+        <li>Giai đoạn 5: Tích hợp Dark/Light mode và tối ưu responsive.</li>
+    </ul>
+
+    <p class="no-indent"><strong>Bước 4: Kiểm thử và tối ưu</strong></p>
+    <ul>
+        <li>Test trên nhiều trình duyệt và thiết bị khác nhau.</li>
+        <li>Đo lường hiệu năng bằng Google Lighthouse.</li>
+        <li>Tối ưu hóa bundle size và loading time.</li>
+        <li>Kiểm tra SEO cơ bản.</li>
+    </ul>
+
+    <p class="no-indent"><strong>Bước 5: Triển khai</strong></p>
+    <ul>
+        <li>Deploy lên Vercel.</li>
+        <li>Thiết lập CI/CD với GitHub.</li>
+        <li>Kiểm tra lại toàn bộ tính năng trên production.</li>
+    </ul>
+
+    <h3>1.5 Tiêu chí đánh giá</h3>
+
+    <p class="no-indent">Website được coi là hoàn thiện khi đáp ứng các tiêu chí sau:</p>
+
+    <p class="no-indent"><strong>1. Về mặt kỹ thuật:</strong></p>
+    <ul>
+        <li>Build thành công không có lỗi.</li>
+        <li>Tất cả các route được generate thành HTML tĩnh.</li>
+        <li>Không có lỗi JavaScript runtime.</li>
+        <li>Code tuân thủ best practices và clean code principles.</li>
+    </ul>
+
+    <p class="no-indent"><strong>2. Về mặt hiệu năng:</strong></p>
+    <ul>
+        <li>Điểm Performance trên Lighthouse ≥ 90.</li>
+        <li>First Contentful Paint (FCP) < 1.8s.</li>
+        <li>Largest Contentful Paint (LCP) < 2.5s.</li>
+    </ul>
+
+    <p class="no-indent"><strong>3. Về mặt trải nghiệm người dùng:</strong></p>
+    <ul>
+        <li>Giao diện không bị vỡ trên mobile, tablet, desktop.</li>
+        <li>Tất cả các tính năng hoạt động đúng: Dark mode, sliders, modal.</li>
+        <li>Navigation mượt mà, không có lag.</li>
+    </ul>
+
+    <p class="no-indent"><strong>4. Về mặt triển khai:</strong></p>
+    <ul>
+        <li>Website deploy thành công trên Vercel.</li>
+        <li>Có thể truy cập công khai qua domain.</li>
+        <li>CI/CD hoạt động đúng (auto deploy khi push code).</li>
+    </ul>
+
+    <hr class="page-break">
+
+    <h2>CHƯƠNG 2: CƠ SỞ LÝ THUYẾT VÀ CÔNG NGHỆ</h2>
+
+    <h3>2.1 Các mô hình render website</h3>
+
+    <h4>2.1.1 Static Website và Static Site Generator</h4>
+
+    <p class="no-indent"><strong>Website tĩnh (Static Website)</strong> là loại website đơn giản nhất, mỗi trang là một file HTML độc lập được lưu trữ trên server. Khi người dùng yêu cầu, server chỉ cần gửi file HTML đó về mà không cần xử lý gì thêm. Điều này mang lại tốc độ tải cực nhanh và độ bảo mật cao.</p>
+
+    <p>Tuy nhiên, việc viết tay hàng trăm file HTML là không khả thi. <strong>Static Site Generator (SSG)</strong> ra đời để giải quyết vấn đề này. SSG là công cụ tự động hóa việc tạo ra các file HTML tĩnh từ các file nguồn như Markdown, MDX, hoặc JSON kết hợp với các template.</p>
+
+    <p class="no-indent"><strong>Quy trình hoạt động của SSG:</strong></p>
+    <ol>
+        <li>Trong quá trình build, SSG đọc tất cả các file nguồn (Markdown/MDX).</li>
+        <li>SSG render các file này thành HTML bằng cách sử dụng template và component.</li>
+        <li>Kết quả là một tập hợp các file HTML tĩnh sẵn sàng để deploy.</li>
+    </ol>
+
+    <p class="no-indent"><strong>Ưu điểm của SSG:</strong></p>
+    <ul>
+        <li><strong>Tốc độ:</strong> Không cần query database, HTML đã được render sẵn.</li>
+        <li><strong>Bảo mật:</strong> Không có server-side code, không có database, giảm thiểu điểm tấn công.</li>
+        <li><strong>Chi phí:</strong> Có thể host miễn phí trên GitHub Pages, Vercel, Netlify.</li>
+        <li><strong>SEO:</strong> Nội dung đã có sẵn trong HTML, bot tìm kiếm dễ dàng index.</li>
+    </ul>
+
+    <h4>2.1.2 Client-Side Rendering (CSR)</h4>
+
+    <p class="no-indent">CSR là mô hình được sử dụng bởi các Single Page Application (SPA) như React mặc định. Server chỉ gửi về một file HTML rỗng và các file JavaScript. Trình duyệt tải JavaScript về và thực thi để render giao diện.</p>
+
+    <p class="no-indent"><strong>Nhược điểm của CSR:</strong></p>
+    <ul>
+        <li><strong>SEO kém:</strong> Bot tìm kiếm chỉ thấy HTML rỗng, không thấy nội dung thực tế.</li>
+        <li><strong>First Contentful Paint chậm:</strong> Người dùng phải đợi JavaScript tải và chạy xong mới thấy nội dung.</li>
+        <li><strong>Tốn tài nguyên client:</strong> Máy người dùng phải xử lý việc render.</li>
+    </ul>
+
+    <h4>2.1.3 Server-Side Rendering (SSR)</h4>
+
+    <p class="no-indent">Với SSR, mỗi khi có request, server sẽ chạy code, query database, và tạo ra HTML hoàn chỉnh rồi gửi về cho client.</p>
+
+    <p class="no-indent"><strong>Nhược điểm của SSR:</strong></p>
+    <ul>
+        <li><strong>Tốn tài nguyên server:</strong> Phải xử lý mỗi request, tốn CPU và memory.</li>
+        <li><strong>Chậm khi server quá tải:</strong> Nếu có nhiều người truy cập cùng lúc, server có thể bị quá tải.</li>
+        <li><strong>Chi phí cao:</strong> Cần server có khả năng chạy Node.js, chi phí hosting cao hơn.</li>
+    </ul>
+
+    <h4>2.1.4 Static Site Generation (SSG) - Giải pháp của đề tài</h4>
+
+    <p class="no-indent">SSG kết hợp những ưu điểm của cả CSR và Static Website:</p>
+
+    <ul>
+        <li><strong>Ở build time:</strong> Render tất cả các trang thành HTML tĩnh (tốt cho SEO, nhanh).</li>
+        <li><strong>Ở runtime:</strong> Người dùng nhận HTML tĩnh ngay lập tức, sau đó JavaScript hydrate để biến trang thành SPA, cho phép navigation mượt mà không cần reload.</li>
+    </ul>
+
+    <p class="no-indent"><strong>Next.js SSG hoạt động như sau:</strong></p>
+
+    <p class="no-indent"><strong>1. Build Time:</strong></p>
+    <ul>
+        <li>Next.js scan tất cả các route trong <code>app/</code> directory.</li>
+        <li>Với mỗi route, Next.js render component thành HTML.</li>
+        <li>Với dynamic routes như <code>/blog/[slug]</code>, Next.js sẽ generate HTML cho mỗi bài viết MDX.</li>
+        <li>Tất cả HTML được lưu vào <code>.next/</code> directory.</li>
+    </ul>
+
+    <p class="no-indent"><strong>2. Runtime:</strong></p>
+    <ul>
+        <li>Người dùng request một trang → Nhận HTML đã có sẵn nội dung (hiển thị ngay).</li>
+        <li>Trình duyệt tải JavaScript → JavaScript hydrate React components.</li>
+        <li>Sau khi hydrate, trang trở thành SPA, navigation không cần reload.</li>
+    </ul>
+
+    <h3>2.2 Công nghệ sử dụng trong đề tài</h3>
+
+    <h4>2.2.1 Next.js 14</h4>
+
+    <p class="no-indent">Next.js là một React framework được phát triển bởi Vercel, cung cấp nhiều tính năng mạnh mẽ:</p>
+
+    <p class="no-indent"><strong>App Router (Next.js 13+):</strong></p>
+    <ul>
+        <li>Hệ thống routing mới dựa trên file system trong thư mục <code>src/app/</code>.</li>
+        <li>Hỗ trợ nested layouts và shared layouts.</li>
+        <li>Loading states và error boundaries tự động.</li>
+        <li>Server Components và Client Components (sử dụng directive <code>"use client"</code> khi cần).</li>
+    </ul>
+
+    <p class="no-indent"><strong>Static Site Generation:</strong></p>
+    <ul>
+        <li>Tự động generate HTML tĩnh tại build time.</li>
+        <li>Hỗ trợ <code>generateStaticParams</code> để pre-render dynamic routes.</li>
+        <li>Tích hợp sẵn, không cần cấu hình phức tạp.</li>
+    </ul>
+
+    <p class="no-indent"><strong>Image Optimization:</strong></p>
+    <ul>
+        <li>Component <code>next/image</code> tự động optimize hình ảnh.</li>
+        <li>Lazy loading và responsive images.</li>
+    </ul>
+
+    <p class="no-indent">Trong đề tài, Next.js 14.2.3 được chọn vì:</p>
+    <ul>
+        <li>SSG tích hợp sẵn, dễ sử dụng.</li>
+        <li>Hỗ trợ MDX tốt thông qua các plugin.</li>
+        <li>Ecosystem phong phú, tài liệu đầy đủ.</li>
+        <li>Tối ưu hiệu năng tự động.</li>
+    </ul>
+
+    <h4>2.2.2 React 18 và TypeScript</h4>
+
+    <p class="no-indent"><strong>React 18:</strong></p>
+    <ul>
+        <li>Thư viện UI phổ biến nhất hiện nay.</li>
+        <li>Sử dụng Virtual DOM để tối ưu hóa việc cập nhật UI.</li>
+        <li>Hooks API (<code>useState</code>, <code>useEffect</code>, <code>useRef</code>) để quản lý state và side effects.</li>
+        <li>Component-based architecture giúp code dễ maintain và reuse.</li>
+    </ul>
+
+    <p class="no-indent"><strong>TypeScript:</strong></p>
+    <ul>
+        <li>Superset của JavaScript với type system.</li>
+        <li>Giúp phát hiện lỗi sớm trong quá trình development.</li>
+        <li>Cải thiện developer experience với IntelliSense.</li>
+        <li>Tăng tính maintainability của codebase.</li>
+    </ul>
+
+    <p class="no-indent">Trong đề tài, TypeScript 5 được sử dụng để:</p>
+    <ul>
+        <li>Định nghĩa interfaces cho BlogPost (trong MDX frontmatter), Certification, Project.</li>
+        <li>Đảm bảo type safety khi làm việc với dữ liệu.</li>
+        <li>Giảm thiểu lỗi runtime.</li>
+    </ul>
+
+    <h4>2.2.3 MDX (Markdown + JSX)</h4>
+
+    <p class="no-indent">MDX là một format đặc biệt cho phép viết Markdown với JSX bên trong. Điều này mang lại sự linh hoạt lớn:</p>
+
+    <ul>
+        <li><strong>Viết nội dung dễ dàng:</strong> Sử dụng Markdown syntax quen thuộc.</li>
+        <li><strong>Nhúng React components:</strong> Có thể sử dụng custom components trong bài viết.</li>
+        <li><strong>Tái sử dụng:</strong> Components có thể được reuse trong nhiều bài viết.</li>
+    </ul>
+
+    <p class="no-indent"><strong>Cấu trúc file MDX:</strong></p>
+    <pre>---
+title: "Tiêu đề bài viết"
+description: "Mô tả"
+date: "2024-12-20"
+author: "Bảo Toàn"
+---
+
+## Nội dung
+
+Có thể viết markdown bình thường...
+
+&lt;CustomComponent prop="value" /&gt;
+
+Hoặc code blocks với syntax highlighting.</pre>
+
+    <p>Trong đề tài, tất cả bài viết được viết bằng MDX trong <code>src/content/blog/</code>, được xử lý bởi Velite để tạo ra type-safe data.</p>
+
+    <h4>2.2.4 Velite</h4>
+
+    <p class="no-indent">Velite là một công cụ giúp chuyển đổi Markdown/MDX thành TypeScript types an toàn. Nó:</p>
+
+    <ul>
+        <li>Đọc các file MDX và extract frontmatter.</li>
+        <li>Generate TypeScript types tự động.</li>
+        <li>Cung cấp API để query content trong code.</li>
+    </ul>
+
+    <p>Velite được tích hợp vào Next.js webpack config để tự động chạy khi build, đảm bảo types luôn được sync với content.</p>
+
+    <h4>2.2.5 Tailwind CSS và shadcn/ui</h4>
+
+    <p class="no-indent"><strong>Tailwind CSS:</strong></p>
+    <ul>
+        <li>Utility-first CSS framework.</li>
+        <li>Thay vì viết CSS riêng, sử dụng các utility classes như <code>flex</code>, <code>p-4</code>, <code>text-center</code>.</li>
+        <li>Tự động loại bỏ unused CSS trong production build.</li>
+        <li>Hỗ trợ Dark Mode dễ dàng với <code>dark:</code> prefix.</li>
+    </ul>
+
+    <p class="no-indent"><strong>shadcn/ui:</strong></p>
+    <ul>
+        <li>Bộ component UI đẹp mắt được xây dựng trên Radix UI và Tailwind CSS.</li>
+        <li>Components được copy vào project (không phải install từ npm).</li>
+        <li>Có thể tùy chỉnh hoàn toàn theo nhu cầu.</li>
+    </ul>
+
+    <h4>2.2.6 Vercel</h4>
+
+    <p class="no-indent">Vercel là nền tảng deploy được tối ưu cho Next.js:</p>
+
+    <ul>
+        <li><strong>Zero-config:</strong> Tự động detect Next.js và cấu hình.</li>
+        <li><strong>CI/CD tự động:</strong> Mỗi push lên GitHub tự động trigger build và deploy.</li>
+        <li><strong>CDN toàn cầu:</strong> Website được phân phối qua CDN, tốc độ tải nhanh ở mọi nơi.</li>
+        <li><strong>Preview deployments:</strong> Mỗi Pull Request có một URL preview riêng.</li>
+    </ul>
+
+    <p>Trong đề tài, website được deploy lên Vercel để tận dụng các tính năng trên.</p>
+
+    <hr class="page-break">
+
+    <h2>CHƯƠNG 3: PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG</h2>
+
+    <h3>3.1 Kiến trúc tổng thể</h3>
+
+    <p class="no-indent">Hệ thống hoạt động theo 3 giai đoạn chính:</p>
+
+    <p class="no-indent"><strong>Giai đoạn 1: Development</strong></p>
+    <ul>
+        <li>Developer viết code React/TypeScript và style với Tailwind CSS.</li>
+        <li>Nội dung blog được viết bằng MDX trong <code>src/content/blog/</code>.</li>
+        <li>Next.js Dev Server cung cấp Hot Module Replacement (HMR) để xem thay đổi ngay lập tức.</li>
+    </ul>
+
+    <p class="no-indent"><strong>Giai đoạn 2: Build & Static Generation</strong></p>
+    <ul>
+        <li>Next.js đọc tất cả routes trong <code>src/app/</code>.</li>
+        <li>Velite đọc các file MDX và generate TypeScript types.</li>
+        <li>Next.js SSG render tất cả pages thành HTML tĩnh.</li>
+        <li>HTML được lưu vào <code>.next/</code> directory.</li>
+    </ul>
+
+    <p class="no-indent"><strong>Giai đoạn 3: Runtime</strong></p>
+    <ul>
+        <li>User request → Nhận HTML tĩnh (hiển thị ngay).</li>
+        <li>Browser tải JS → Hydrate React components.</li>
+        <li>Trang trở thành SPA, navigation mượt mà.</li>
+    </ul>
+
+    <h3>3.2 Thiết kế cấu trúc dữ liệu</h3>
+
+    <h4>3.2.1 Blog Post Schema</h4>
+
+    <p class="no-indent">Mỗi bài viết là một file MDX với frontmatter chứa metadata:</p>
+
+    <pre>interface BlogPost {
+  title: string;        // Tiêu đề
+  description: string;  // Mô tả ngắn
+  image: string;       // Hình ảnh đại diện
+  date: string;        // Ngày đăng (YYYY-MM-DD)
+  author: string;      // Tác giả
+}</pre>
+
+    <p>Nội dung bài viết được viết bằng Markdown/MDX bên dưới frontmatter.</p>
+
+    <h4>3.2.2 Certification Schema</h4>
+
+    <p class="no-indent">Chứng chỉ được định nghĩa trong <code>src/config/certifications.ts</code>:</p>
+
+    <pre>interface Certification {
+  name: string;         // Tên chứng chỉ
+  issuer: string;       // Tổ chức cấp
+  year: string;         // Năm
+  icon: ComponentType;  // Icon từ lucide-react
+  file: string;         // Đường dẫn file ảnh
+  image: string;        // Đường dẫn để hiển thị
+}</pre>
+
+    <h4>3.2.3 Skills và Projects Schema</h4>
+
+    <ul>
+        <li><strong>Skills:</strong> Array of objects với <code>name</code>, <code>icon</code>, <code>color</code>.</li>
+        <li><strong>Projects:</strong> Array of objects với <code>title</code>, <code>description</code>, <code>tech</code>, <code>links</code>.</li>
+    </ul>
+
+    <h3>3.3 Thiết kế giao diện</h3>
+
+    <h4>3.3.1 Design Philosophy</h4>
+
+    <p class="no-indent">Giao diện được thiết kế theo phong cách <strong>Minimalism</strong> - tập trung vào nội dung và trải nghiệm đọc:</p>
+
+    <ul>
+        <li><strong>Màu sắc:</strong> Hệ thống màu của Tailwind với dark mode support.</li>
+        <li><strong>Typography:</strong> Font Inter cho text, Geist Mono cho code.</li>
+        <li><strong>Spacing:</strong> Sử dụng 4px grid system của Tailwind.</li>
+    </ul>
+
+    <h4>3.3.2 Components chính</h4>
+
+    <p class="no-indent"><strong>Header:</strong></p>
+    <ul>
+        <li>Sticky navigation bar.</li>
+        <li>Blur effect khi scroll.</li>
+        <li>Mobile hamburger menu.</li>
+    </ul>
+
+    <p class="no-indent"><strong>Footer:</strong></p>
+    <ul>
+        <li>Thông tin liên hệ và social links.</li>
+        <li>Copyright notice.</li>
+    </ul>
+
+    <p class="no-indent"><strong>Blog Card:</strong></p>
+    <ul>
+        <li>Image, title, description, date.</li>
+        <li>Hover effect.</li>
+    </ul>
+
+    <p class="no-indent"><strong>Sliders (Skills/Certifications/Projects):</strong></p>
+    <ul>
+        <li>Horizontal scroll với infinite loop.</li>
+        <li>Navigation buttons.</li>
+        <li>Scroll snap.</li>
+    </ul>
+
+    <p class="no-indent"><strong>Certificate Modal:</strong></p>
+    <ul>
+        <li>Component <code>CertificateModal</code> được tạo riêng trong <code>src/components/certificate-modal.tsx</code>.</li>
+        <li>Overlay với background blur (black/80 opacity).</li>
+        <li>Hiển thị ảnh chứng chỉ full size (hỗ trợ cả JPG và PDF).</li>
+        <li>Close button (X) và click outside modal để đóng.</li>
+        <li>Sử dụng state management với <code>useState</code> để control modal visibility.</li>
+    </ul>
+
+    <h3>3.4 Cấu trúc thư mục</h3>
+
+    <pre>next-mdx-blog/
+├── src/
+│   ├── app/              # Next.js App Router
+│   │   ├── layout.tsx     # Root layout
+│   │   ├── page.tsx      # Home/Portfolio
+│   │   ├── about/        # About page
+│   │   └── blog/         # Blog pages
+│   ├── components/       # React components
+│   ├── config/           # Config files
+│   ├── content/          # MDX blog posts
+│   ├── constants/        # Constants
+│   ├── lib/              # Utilities
+│   └── styles/           # Global CSS
+├── public/               # Static assets
+└── package.json</pre>
+
+    <hr class="page-break">
+
+    <h2>CHƯƠNG 4: TRIỂN KHAI VÀ THỰC HIỆN</h2>
+
+    <h3>4.1 Trang chủ (Portfolio)</h3>
+
+    <p class="no-indent">Trang chủ được thiết kế như một portfolio cá nhân với các section chính:</p>
+
+    <p><strong>Hero Section:</strong> Phần đầu trang với lời chào, giới thiệu tên tác giả và mô tả ngắn về blog. Có các nút điều hướng đến Blog và About.</p>
+
+    <p><strong>About Section:</strong> Giới thiệu về bản thân, sở thích và định hướng nghề nghiệp trong lĩnh vực lập trình và an ninh mạng.</p>
+
+    <p class="center" style="margin: 20px 0; font-style: italic; text-indent: 0;"><strong>Hình 4.1:</strong> Giao diện trang chủ - Hero Section và About Section</p>
+
+    <p><strong>Skills Section:</strong> Hiển thị các kỹ năng chuyên môn (Java, JavaScript, Python, Web Development, Cyber Security, Machine Learning, Data Analysis, Network Security, Penetration Testing, React.js, Node.js) dưới dạng horizontal slider với infinite loop và navigation buttons. Mỗi skill card có icon và gradient background riêng.</p>
+
+    <p><strong>Certifications Section:</strong> Hiển thị các chứng chỉ đạt được (Introduction to Cybersecurity, JavaScript Essentials 1 & 2, Networking Basics) dưới dạng slider tương tự Skills. Click vào card sẽ mở modal hiển thị hình ảnh chứng chỉ full size.</p>
+
+    <p class="center" style="margin: 20px 0; font-style: italic; text-indent: 0;"><strong>Hình 4.2:</strong> Giao diện phần Kỹ Năng và Chứng Chỉ với horizontal slider</p>
+
+    <p><strong>Projects Section:</strong> Hiển thị các dự án cá nhân đã thực hiện (Web Đánh Giá Game, Bảo Mật 2 Lớp SSH Server, Hệ Thống Phát Hiện Tấn Công, Website Chúc Mừng Sinh Nhật) với thông tin mô tả, tech stack và links đến GitHub/Demo.</p>
+
+    <p class="center" style="margin: 20px 0; font-style: italic; text-indent: 0;"><strong>Hình 4.3:</strong> Giao diện phần Dự Án Cá Nhân và Blog Section</p>
+
+    <h3>4.2 Trang Blog</h3>
+
+    <p class="no-indent"><strong>Trang danh sách blog (<code>/blog</code>):</strong> Hiển thị tất cả các bài viết dưới dạng grid layout. Mỗi blog card có hình ảnh đại diện, tiêu đề, mô tả ngắn và ngày đăng. Layout responsive: 3 cột trên desktop, 2 cột trên tablet, 1 cột trên mobile.</p>
+
+    <p><strong>Trang chi tiết bài viết (<code>/blog/[...slug]</code>):</strong> Sử dụng dynamic routing để hiển thị nội dung từ file MDX. Trang có header với thông tin bài viết, nội dung được render từ MDX với syntax highlighting cho code blocks, và styling đẹp mắt cho các elements. Nội dung bao gồm các bài viết về Java và JavaScript.</p>
+
+    <h3>4.3 Trang About Me</h3>
+
+    <p class="no-indent">Trang About Me cung cấp thông tin chi tiết về tác giả:</p>
+
+    <p><strong>Thông tin cá nhân:</strong> Hiển thị avatar, tên, vai trò (Sinh viên năm cuối ngành Công nghệ Thông tin, chuyên ngành An ninh mạng) và mô tả ngắn.</p>
+
+    <p><strong>Thông tin liên hệ:</strong> Email (toanvo3789@gmail.com) với label "Contact for work" và số điện thoại (0934044503). Các link có thể click để mở email client hoặc gọi điện.</p>
+
+    <p><strong>Kỹ năng:</strong> Danh sách các kỹ năng chuyên môn với icons.</p>
+
+    <p><strong>Sở thích:</strong> Hiển thị các sở thích (Chơi Game, Xem Phim, Nghe Nhạc, Đi Phượt) dưới dạng grid với gradient backgrounds và hover effects.</p>
+
+    <h3>4.4 Tính năng chung</h3>
+
+    <p class="no-indent"><strong>Dark/Light Mode:</strong> Website hỗ trợ chuyển đổi giữa chế độ sáng và tối. Theme được lưu trong localStorage và tự động detect system preference khi lần đầu truy cập.</p>
+
+    <p><strong>Responsive Design:</strong> Website tự động thích ứng với mọi kích thước màn hình. Trên desktop hiển thị menu đầy đủ và layout 3 cột cho blog. Trên tablet và mobile, menu thu gọn thành hamburger và layout điều chỉnh phù hợp.</p>
+
+    <h3>4.5 Hướng dẫn cài đặt</h3>
+
+    <p class="no-indent"><strong>Yêu cầu:</strong></p>
+    <ul>
+        <li>Node.js 18+</li>
+        <li>npm/yarn/pnpm</li>
+    </ul>
+
+    <p class="no-indent"><strong>Các bước:</strong></p>
+
+    <p class="no-indent"><strong>1. Clone repository:</strong></p>
+    <pre>git clone https://github.com/ToanVo2309/blog.git
+cd blog</pre>
+    <p class="no-indent"><strong>Lưu ý:</strong> Repository GitHub của project là https://github.com/ToanVo2309/blog.git</p>
+
+    <p class="no-indent"><strong>2. Install dependencies:</strong></p>
+    <pre>npm install</pre>
+
+    <p class="no-indent"><strong>3. Run dev server:</strong></p>
+    <pre>npm run dev</pre>
+    <p>Truy cập http://localhost:3000</p>
+
+    <p class="no-indent"><strong>4. Build production:</strong></p>
+    <pre>npm run build
+npm start</pre>
+
+    <p class="no-indent"><strong>Thêm bài viết mới:</strong></p>
+
+    <p>Tạo file <code>.mdx</code> trong <code>src/content/blog/</code>:</p>
+
+    <pre>---
+title: "Tiêu đề"
+description: "Mô tả"
+image: "/images/blog/image.svg"
+date: "2024-12-20"
+author: "Bảo Toàn"
+---
+
+Nội dung...</pre>
+
+    <hr class="page-break">
+
+    <h2>CHƯƠNG 5: KẾT QUẢ VÀ ĐÁNH GIÁ</h2>
+
+    <h3>5.1 Kết quả đạt được</h3>
+
+    <h4>5.1.1 Về mặt kiến thức</h4>
+
+    <ul>
+        <li>Hiểu sâu về các mô hình render (SSR, CSR, SSG).</li>
+        <li>Nắm vững Next.js 14 App Router và SSG.</li>
+        <li>Thành thạo MDX và cách tích hợp vào Next.js.</li>
+        <li>Sử dụng TypeScript hiệu quả để đảm bảo type safety.</li>
+    </ul>
+
+    <h4>5.1.2 Về mặt sản phẩm</h4>
+
+    <ul>
+        <li>Website hoàn chỉnh với hiệu năng cao.</li>
+        <li>Giao diện đẹp, chuyên nghiệp.</li>
+        <li>Tất cả tính năng hoạt động đúng.</li>
+        <li>Responsive trên mọi thiết bị.</li>
+    </ul>
+
+    <h4>5.1.3 Về mặt kỹ năng</h4>
+
+    <ul>
+        <li>Nâng cao kỹ năng debugging và optimization.</li>
+        <li>Kỹ năng tự học công nghệ mới.</li>
+        <li>Kỹ năng thiết kế UI/UX.</li>
+    </ul>
+
+    <h4>5.1.4 Về mặt triển khai</h4>
+
+    <ul>
+        <li>Deploy thành công lên Vercel.</li>
+        <li>CI/CD tự động hoạt động tốt.</li>
+    </ul>
+
+    <h3>5.2 Hạn chế</h3>
+
+    <ul>
+        <li><strong>Quản lý nội dung:</strong> Phải chỉnh sửa file MDX trực tiếp, không có admin panel.</li>
+        <li><strong>Tương tác:</strong> Chưa có comment system.</li>
+        <li><strong>Tìm kiếm:</strong> Chưa có search functionality.</li>
+        <li><strong>Analytics:</strong> Chưa tích hợp tracking.</li>
+    </ul>
+
+    <h3>5.3 Hướng phát triển</h3>
+
+    <ol>
+        <li><strong>CMS Integration:</strong> Kết nối Headless CMS (Strapi, Contentful).</li>
+        <li><strong>Comment System:</strong> Tích hợp Giscus hoặc Utterances.</li>
+        <li><strong>Search:</strong> Implement Fuse.js hoặc Algolia.</li>
+        <li><strong>SEO:</strong> Auto-generate sitemap, Open Graph tags, JSON-LD.</li>
+        <li><strong>Blog Features:</strong> Tags, categories, related posts, TOC.</li>
+        <li><strong>Performance:</strong> Lazy loading, code splitting, PWA.</li>
+        <li><strong>i18n:</strong> Hỗ trợ đa ngôn ngữ.</li>
+        <li><strong>Newsletter:</strong> Email subscription với Mailchimp/ConvertKit.</li>
+    </ol>
+
+    <hr class="page-break">
+
+    <h2>KẾT LUẬN</h2>
+
+    <p class="no-indent">Đề tài "Xây dựng Website Blog cá nhân sử dụng công nghệ Static Site Generator" đã được hoàn thành thành công. Website "Bảo Toàn Dev Blog" không chỉ là nơi chia sẻ kiến thức mà còn là minh chứng cho khả năng áp dụng các công nghệ web hiện đại. Qua quá trình thực hiện, em đã học được nhiều kiến thức và kỹ năng quý giá về Next.js, React, TypeScript và các công nghệ liên quan.</p>
+
+    <p>Website đã được deploy thành công và có thể truy cập công khai, đáp ứng đầy đủ các mục tiêu đã đề ra. Trong tương lai, website sẽ tiếp tục được phát triển và cải tiến với các tính năng mới như đã nêu trong phần hướng phát triển.</p>
+
+    <hr>
+
+    <p class="center" style="margin-top: 50px;"><strong>Hết báo cáo</strong></p>
+
+</body>
+</html>
+
