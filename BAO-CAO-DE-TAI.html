@@ -135,12 +135,146 @@
             margin-top: 10px;
             margin-bottom: 50px;
         }
+        
+        .toc-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+            text-indent: 0;
+        }
+        
+        .toc-dots {
+            flex: 1;
+            border-bottom: 1px dotted #000;
+            margin: 0 8px;
+            height: 1em;
+        }
+        
+        .toc-page {
+            font-weight: normal;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14pt;
+        }
+        
+        table th {
+            background-color: #f0f0f0;
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        table td:first-child {
+            text-align: center;
+            font-weight: bold;
+            width: 15%;
+        }
+        
+        table td:nth-child(2) {
+            width: 30%;
+        }
+        
+        table td:nth-child(3) {
+            width: 55%;
+        }
     </style>
 </head>
 <body>
     <div class="title-page">
         <h1>BÁO CÁO ĐỀ TÀI TỐT NGHIỆP</h1>
         <h2>XÂY DỰNG WEBSITE BLOG CÁ NHÂN SỬ DỤNG CÔNG NGHỆ STATIC SITE GENERATOR</h2>
+    </div>
+
+    <hr class="page-break">
+
+    <h1 style="text-align: center; margin-bottom: 30px; margin-top: 0;">MỤC LỤC</h1>
+
+    <div style="margin-left: 0; text-indent: 0;">
+        <p style="margin-bottom: 15px; font-weight: bold;">DANH MỤC CÁC HÌNH ẢNH</p>
+        <div class="toc-item" style="margin-left: 1cm;"><span>Hình 4.1: Giao diện trang chủ - Hero Section và About Section</span><span class="toc-dots"></span><span class="toc-page">7</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>Hình 4.2: Giao diện phần Kỹ Năng và Chứng Chỉ với horizontal slider</span><span class="toc-dots"></span><span class="toc-page">8</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>Hình 4.3: Giao diện phần Dự Án Cá Nhân và Blog Section</span><span class="toc-dots"></span><span class="toc-page">9</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>Hình 4.4: Giao diện trang danh sách blog với layout grid</span><span class="toc-dots"></span><span class="toc-page">10</span></div>
+        <div class="toc-item" style="margin-left: 1cm; margin-bottom: 15px;"><span>Hình 4.5: Giao diện trang About Me - phần thông tin cá nhân và liên hệ</span><span class="toc-dots"></span><span class="toc-page">11</span></div>
+        <div class="toc-item" style="margin-left: 1cm; margin-bottom: 15px;"><span>Hình 4.6: Giao diện trang About Me - phần giới thiệu và sở thích</span><span class="toc-dots"></span><span class="toc-page">12</span></div>
+
+        <p style="margin-bottom: 15px; font-weight: bold;">DANH MỤC BẢNG BIỂU</p>
+        <div class="toc-item" style="margin-left: 1cm; margin-bottom: 15px;"><span>(Không có)</span><span class="toc-dots"></span><span class="toc-page">8</span></div>
+
+        <p style="margin-bottom: 15px; font-weight: bold;">DANH MỤC CÁC TỪ VIẾT TẮT</p>
+        <div class="toc-item" style="margin-left: 1cm;"><span>SSG: Static Site Generator</span><span class="toc-dots"></span><span class="toc-page">9</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>SSR: Server-Side Rendering</span><span class="toc-dots"></span><span class="toc-page">9</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>CSR: Client-Side Rendering</span><span class="toc-dots"></span><span class="toc-page">9</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>MDX: Markdown + JSX</span><span class="toc-dots"></span><span class="toc-page">9</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>SPA: Single Page Application</span><span class="toc-dots"></span><span class="toc-page">9</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>UI: User Interface</span><span class="toc-dots"></span><span class="toc-page">9</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>UX: User Experience</span><span class="toc-dots"></span><span class="toc-page">9</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>CI/CD: Continuous Integration/Continuous Deployment</span><span class="toc-dots"></span><span class="toc-page">9</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>SEO: Search Engine Optimization</span><span class="toc-dots"></span><span class="toc-page">9</span></div>
+        <div class="toc-item" style="margin-left: 1cm; margin-bottom: 15px;"><span>API: Application Programming Interface</span><span class="toc-dots"></span><span class="toc-page">9</span></div>
+
+        <div class="toc-item" style="margin-bottom: 10px; font-weight: bold;"><span>CHƯƠNG 1: ĐẶT VẤN ĐỀ</span><span class="toc-dots"></span><span class="toc-page">11</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>1.1 Bối cảnh và lý do chọn đề tài</span><span class="toc-dots"></span><span class="toc-page">11</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>1.2 Mục tiêu nghiên cứu</span><span class="toc-dots"></span><span class="toc-page">11</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm;"><span>1.2.1 Mục tiêu chung</span><span class="toc-dots"></span><span class="toc-page">11</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm;"><span>1.2.2 Mục tiêu cụ thể</span><span class="toc-dots"></span><span class="toc-page">11</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>1.3 Phạm vi và giới hạn của đề tài</span><span class="toc-dots"></span><span class="toc-page">11</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>1.4 Phương pháp nghiên cứu</span><span class="toc-dots"></span><span class="toc-page">12</span></div>
+        <div class="toc-item" style="margin-left: 1cm; margin-bottom: 10px;"><span>1.5 Tiêu chí đánh giá</span><span class="toc-dots"></span><span class="toc-page">12</span></div>
+
+        <div class="toc-item" style="margin-bottom: 10px; font-weight: bold;"><span>CHƯƠNG 2: CƠ SỞ LÝ THUYẾT VÀ CÔNG NGHỆ</span><span class="toc-dots"></span><span class="toc-page">14</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>2.1 Các mô hình render website</span><span class="toc-dots"></span><span class="toc-page">14</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm;"><span>2.1.1 Static Website và Static Site Generator</span><span class="toc-dots"></span><span class="toc-page">14</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm;"><span>2.1.2 Client-Side Rendering (CSR)</span><span class="toc-dots"></span><span class="toc-page">14</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm;"><span>2.1.3 Server-Side Rendering (SSR)</span><span class="toc-dots"></span><span class="toc-page">14</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm;"><span>2.1.4 Static Site Generation (SSG)</span><span class="toc-dots"></span><span class="toc-page">14</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>2.2 Công nghệ sử dụng trong đề tài</span><span class="toc-dots"></span><span class="toc-page">14</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm;"><span>2.2.1 Next.js 14</span><span class="toc-dots"></span><span class="toc-page">14</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm;"><span>2.2.2 React 18 và TypeScript</span><span class="toc-dots"></span><span class="toc-page">14</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm;"><span>2.2.3 MDX (Markdown + JSX)</span><span class="toc-dots"></span><span class="toc-page">15</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm;"><span>2.2.4 Velite</span><span class="toc-dots"></span><span class="toc-page">15</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm;"><span>2.2.5 Tailwind CSS và shadcn/ui</span><span class="toc-dots"></span><span class="toc-page">15</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm; margin-bottom: 10px;"><span>2.2.6 Vercel</span><span class="toc-dots"></span><span class="toc-page">15</span></div>
+
+        <div class="toc-item" style="margin-bottom: 10px; font-weight: bold;"><span>CHƯƠNG 3: PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG</span><span class="toc-dots"></span><span class="toc-page">16</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>3.1 Kiến trúc tổng thể</span><span class="toc-dots"></span><span class="toc-page">16</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>3.2 Thiết kế cấu trúc dữ liệu</span><span class="toc-dots"></span><span class="toc-page">17</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>3.3 Thiết kế giao diện</span><span class="toc-dots"></span><span class="toc-page">17</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm;"><span>3.3.1 Design Philosophy</span><span class="toc-dots"></span><span class="toc-page">17</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm;"><span>3.3.2 Components chính</span><span class="toc-dots"></span><span class="toc-page">17</span></div>
+        <div class="toc-item" style="margin-left: 1cm; margin-bottom: 10px;"><span>3.4 Cấu trúc thư mục</span><span class="toc-dots"></span><span class="toc-page">17</span></div>
+
+        <div class="toc-item" style="margin-bottom: 10px; font-weight: bold;"><span>CHƯƠNG 4: TRIỂN KHAI VÀ THỰC HIỆN</span><span class="toc-dots"></span><span class="toc-page">19</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>4.1 Trang chủ (Portfolio)</span><span class="toc-dots"></span><span class="toc-page">19</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>4.2 Trang Blog</span><span class="toc-dots"></span><span class="toc-page">19</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>4.3 Trang About Me</span><span class="toc-dots"></span><span class="toc-page">20</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>4.4 Tính năng chung</span><span class="toc-dots"></span><span class="toc-page">21</span></div>
+        <div class="toc-item" style="margin-left: 1cm; margin-bottom: 10px;"><span>4.5 Hướng dẫn cài đặt</span><span class="toc-dots"></span><span class="toc-page">21</span></div>
+
+        <div class="toc-item" style="margin-bottom: 10px; font-weight: bold;"><span>CHƯƠNG 5: KẾT QUẢ VÀ ĐÁNH GIÁ</span><span class="toc-dots"></span><span class="toc-page">22</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>5.1 Kết quả đạt được</span><span class="toc-dots"></span><span class="toc-page">22</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm;"><span>5.1.1 Về mặt kiến thức</span><span class="toc-dots"></span><span class="toc-page">22</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm;"><span>5.1.2 Về mặt sản phẩm</span><span class="toc-dots"></span><span class="toc-page">22</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm;"><span>5.1.3 Về mặt kỹ năng</span><span class="toc-dots"></span><span class="toc-page">22</span></div>
+        <div class="toc-item" style="margin-left: 1.5cm;"><span>5.1.4 Về mặt triển khai</span><span class="toc-dots"></span><span class="toc-page">22</span></div>
+        <div class="toc-item" style="margin-left: 1cm;"><span>5.2 Hạn chế</span><span class="toc-dots"></span><span class="toc-page">22</span></div>
+        <div class="toc-item" style="margin-left: 1cm; margin-bottom: 10px;"><span>5.3 Hướng phát triển</span><span class="toc-dots"></span><span class="toc-page">22</span></div>
+
+        <div class="toc-item" style="margin-bottom: 10px; font-weight: bold;"><span>TÀI LIỆU THAM KHẢO</span><span class="toc-dots"></span><span class="toc-page">23</span></div>
+
+        <div class="toc-item" style="margin-bottom: 10px; font-weight: bold;"><span>KẾT LUẬN</span><span class="toc-dots"></span><span class="toc-page">24</span></div>
     </div>
 
     <hr class="page-break">
@@ -788,6 +922,113 @@ Nội dung...</pre>
         <li><strong>Performance:</strong> Lazy loading, code splitting, PWA.</li>
         <li><strong>i18n:</strong> Hỗ trợ đa ngôn ngữ.</li>
         <li><strong>Newsletter:</strong> Email subscription với Mailchimp/ConvertKit.</li>
+    </ol>
+
+    <hr class="page-break">
+
+    <h2>DANH MỤC CÁC TỪ VIẾT TẮT</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Viết tắt</th>
+                <th>Tên đầy đủ</th>
+                <th>Giải thích</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>SSG</td>
+                <td>Static Site Generator</td>
+                <td>Trình tạo trang tĩnh: Tạo ra các tệp HTML sẵn từ trước khi người dùng yêu cầu.</td>
+            </tr>
+            <tr>
+                <td>SSR</td>
+                <td>Server-Side Rendering</td>
+                <td>Render phía máy chủ: Trang web được dựng thành HTML hoàn chỉnh ngay trên máy chủ trước khi gửi đến trình duyệt.</td>
+            </tr>
+            <tr>
+                <td>CSR</td>
+                <td>Client-Side Rendering</td>
+                <td>Render phía máy khách: Trình duyệt tải JavaScript về và tự dựng nội dung trang web.</td>
+            </tr>
+            <tr>
+                <td>SPA</td>
+                <td>Single Page Application</td>
+                <td>Ứng dụng trang đơn: Ứng dụng web chỉ tải một trang duy nhất và cập nhật nội dung mà không cần tải lại toàn bộ trang.</td>
+            </tr>
+            <tr>
+                <td>SEO</td>
+                <td>Search Engine Optimization</td>
+                <td>Tối ưu hóa công cụ tìm kiếm: Các kỹ thuật giúp trang web có thứ hạng cao hơn trên Google, Bing...</td>
+            </tr>
+            <tr>
+                <td>DOM</td>
+                <td>Document Object Model</td>
+                <td>Mô hình đối tượng tài liệu: Cấu trúc dạng cây đại diện cho nội dung của một trang web để lập trình viên có thể thao tác (thêm, sửa, xóa).</td>
+            </tr>
+            <tr>
+                <td>HMR</td>
+                <td>Hot Module Replacement</td>
+                <td>Thay thế module nóng: Giúp cập nhật các thay đổi trong mã nguồn lên trình duyệt ngay lập tức mà không cần tải lại trang thủ công.</td>
+            </tr>
+            <tr>
+                <td>API</td>
+                <td>Application Programming Interface</td>
+                <td>Giao diện lập trình ứng dụng: Phương thức để các phần mềm hoặc hệ thống khác nhau có thể giao tiếp với nhau.</td>
+            </tr>
+            <tr>
+                <td>UI/UX</td>
+                <td>User Interface / User Experience</td>
+                <td>Giao diện / Trải nghiệm người dùng: UI tập trung vào vẻ ngoài (màu sắc, nút bấm), trong khi UX tập trung vào cảm giác và sự tiện dụng khi dùng sản phẩm.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr class="page-break">
+
+    <h2>TÀI LIỆU THAM KHẢO</h2>
+
+    <ol style="margin-left: 2cm; margin-bottom: 20px;">
+        <li style="margin-bottom: 10px;">
+            Next.js Documentation: <a href="https://nextjs.org/docs" target="_blank" style="color: #0066cc; text-decoration: underline;">https://nextjs.org/docs</a> - Tài liệu chính thức về Next.js 14, App Router và Static Site Generation.
+        </li>
+        <li style="margin-bottom: 10px;">
+            React Documentation: <a href="https://react.dev/" target="_blank" style="color: #0066cc; text-decoration: underline;">https://react.dev/</a> - Tài liệu chính thức về React 18 và Hooks.
+        </li>
+        <li style="margin-bottom: 10px;">
+            TypeScript Documentation: <a href="https://www.typescriptlang.org/docs/" target="_blank" style="color: #0066cc; text-decoration: underline;">https://www.typescriptlang.org/docs/</a> - Tài liệu về TypeScript và type system.
+        </li>
+        <li style="margin-bottom: 10px;">
+            MDX Documentation: <a href="https://mdxjs.com/" target="_blank" style="color: #0066cc; text-decoration: underline;">https://mdxjs.com/</a> - Tài liệu về MDX (Markdown + JSX).
+        </li>
+        <li style="margin-bottom: 10px;">
+            Velite Documentation: <a href="https://velite.js.org/" target="_blank" style="color: #0066cc; text-decoration: underline;">https://velite.js.org/</a> - Tài liệu về Velite - Type-safe content layer.
+        </li>
+        <li style="margin-bottom: 10px;">
+            Tailwind CSS: <a href="https://tailwindcss.com/" target="_blank" style="color: #0066cc; text-decoration: underline;">https://tailwindcss.com/</a> - Tra cứu các class utility.
+        </li>
+        <li style="margin-bottom: 10px;">
+            shadcn/ui Documentation: <a href="https://ui.shadcn.com/" target="_blank" style="color: #0066cc; text-decoration: underline;">https://ui.shadcn.com/</a> - Tài liệu về shadcn/ui components.
+        </li>
+        <li style="margin-bottom: 10px;">
+            Vercel Documentation: <a href="https://vercel.com/docs" target="_blank" style="color: #0066cc; text-decoration: underline;">https://vercel.com/docs</a> - Hướng dẫn deploy Next.js lên Vercel.
+        </li>
+        <li style="margin-bottom: 10px;">
+            Static Site Generators – MDN Web Docs: <a href="https://developer.mozilla.org/en-US/docs/Glossary/Static_site_generator" target="_blank" style="color: #0066cc; text-decoration: underline;">https://developer.mozilla.org/en-US/docs/Glossary/Static_site_generator</a>
+        </li>
+        <li style="margin-bottom: 10px;">
+            MDN Web Docs: <a href="https://developer.mozilla.org/" target="_blank" style="color: #0066cc; text-decoration: underline;">https://developer.mozilla.org/</a> - Tài liệu tham khảo về JavaScript và Web APIs.
+        </li>
+        <li style="margin-bottom: 10px;">
+            Web Design Principles – Responsive Design: <a href="https://www.w3schools.com/css/css_rwd_intro.asp" target="_blank" style="color: #0066cc; text-decoration: underline;">https://www.w3schools.com/css/css_rwd_intro.asp</a>
+        </li>
+        <li style="margin-bottom: 10px;">
+            Profile mẫu: <a href="https://dangnghinhxuan.wixsite.com/portfolio" target="_blank" style="color: #0066cc; text-decoration: underline;">https://dangnghinhxuan.wixsite.com/portfolio</a>
+        </li>
+        <li style="margin-bottom: 10px;">
+            Blog công nghệ mẫu: <a href="https://kysubrse.com/" target="_blank" style="color: #0066cc; text-decoration: underline;">https://kysubrse.com/</a>
+        </li>
     </ol>
 
     <hr class="page-break">
