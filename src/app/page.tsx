@@ -205,7 +205,7 @@ export default function Home() {
                 <Quote className="absolute left-4 top-4 size-6 text-muted-foreground/40" />
                 <blockquote className="relative pl-8 italic text-muted-foreground">
                   <p className="mb-2 text-base leading-relaxed sm:text-lg">
-                    "Learning never exhausts the mind."
+                    &ldquo;Learning never exhausts the mind.&rdquo;
                   </p>
                   <footer className="mt-3 text-right text-sm font-medium not-italic text-foreground/70">
                     — Leonardo da Vinci
