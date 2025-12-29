@@ -26,7 +26,7 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="vi" className="light">
+    <html lang="vi" className="dark">
       <body
         className={cn(
           "min-h-screen antialiased font-lexend bg-background",

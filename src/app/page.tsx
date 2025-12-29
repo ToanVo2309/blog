@@ -5,7 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { SOCIALS } from "@/constants";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Award, Code, Shield, Globe, BookOpen, Network, Lock, Brain, BarChart3, Terminal, Layers, Zap, ChevronLeft, ChevronRight, ExternalLink, Github, Cake } from "lucide-react";
+import { Award, Code, Shield, Globe, BookOpen, Network, Lock, Brain, BarChart3, Terminal, Layers, Zap, ChevronLeft, ChevronRight, ExternalLink, Github, Cake, Quote } from "lucide-react";
 import CertificateModal from "@/components/certificate-modal";
 import { certifications } from "@/config/certifications";
 
@@ -171,10 +171,15 @@ export default function Home() {
               rel="noreferrer"
               target="_blank"
               className={cn(
-                    "group relative flex items-center justify-center rounded-full border border-border bg-card transition-all hover:border-primary hover:bg-primary/10 hover:shadow-lg size-11",
+                    "group relative flex items-center justify-center rounded-full border border-border/50 bg-muted/50 transition-all hover:border-primary/50 hover:bg-primary/20 hover:shadow-lg size-11",
               )}
             >
-                  <social.icon className="text-foreground transition-colors group-hover:text-primary size-5" />
+                  <social.icon className={cn(
+                    "transition-colors size-5",
+                    social.label === "Github" 
+                      ? "text-gray-300 group-hover:text-white" 
+                      : "text-blue-400 group-hover:text-blue-300"
+                  )} />
               <span className="sr-only">{social.label}</span>
             </Link>
           ))}
@@ -194,6 +199,21 @@ export default function Home() {
               chuyên ngành <span className="font-semibold text-foreground">An ninh mạng</span>
             </p>
 
+            {/* Quote */}
+            <div className="mx-auto mb-8 max-w-2xl">
+              <div className="relative rounded-lg border border-border/50 bg-muted/30 p-6 backdrop-blur-sm">
+                <Quote className="absolute left-4 top-4 size-6 text-muted-foreground/40" />
+                <blockquote className="relative pl-8 italic text-muted-foreground">
+                  <p className="mb-2 text-base leading-relaxed sm:text-lg">
+                    "Learning never exhausts the mind."
+                  </p>
+                  <footer className="mt-3 text-right text-sm font-medium not-italic text-foreground/70">
+                    — Leonardo da Vinci
+                  </footer>
+                </blockquote>
+              </div>
+            </div>
+
             {/* CTA Button */}
             <div className="flex items-center justify-center gap-4">
               <Link
@@ -207,35 +227,6 @@ export default function Home() {
                 Khám phá Blog
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section className="container mx-auto max-w-5xl px-4 py-16 md:py-20">
-        <div className="mx-auto max-w-3xl">
-          <h2 className="mb-6 text-center text-3xl font-bold tracking-tight sm:text-4xl">
-            Về Tôi
-          </h2>
-          <div className="space-y-4 text-center text-muted-foreground">
-            <p className="text-lg leading-relaxed">
-              Trong quá trình học tập và thực hành, mình đặc biệt quan tâm đến các lĩnh vực như{" "}
-              <span className="font-semibold text-foreground">lập trình Java</span>,{" "}
-              <span className="font-semibold text-foreground">JavaScript</span>,{" "}
-              <span className="font-semibold text-foreground">phát triển web</span> và các vấn đề liên quan đến{" "}
-              <span className="font-semibold text-foreground">bảo mật hệ thống</span>,{" "}
-              <span className="font-semibold text-foreground">an toàn thông tin</span>.
-            </p>
-            <p className="text-lg leading-relaxed">
-              Mình luôn cố gắng kết hợp giữa kiến thức lý thuyết trên giảng đường và việc tự học, 
-              thực hành thông qua các dự án cá nhân.
-            </p>
-            <p className="text-lg leading-relaxed">
-              <span className="font-semibold text-foreground">Blog Bảo Toàn Dev</span> được tạo ra nhằm mục đích chia sẻ lại những kiến thức 
-              mình đã học, các kinh nghiệm lập trình, cũng như những ghi chú quan trọng về Java và 
-              JavaScript trong quá trình học tập. Hy vọng những bài viết trên blog sẽ giúp ích cho 
-              các bạn sinh viên CNTT và những người mới bắt đầu tìm hiểu về lập trình.
-            </p>
           </div>
         </div>
       </section>

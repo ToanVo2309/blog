@@ -54,10 +54,15 @@ export default function AboutPage() {
                   rel="noreferrer"
                   target="_blank"
                   className={cn(
-                    "group flex items-center justify-center rounded-full border border-border bg-card transition-all hover:border-primary hover:bg-primary/10 hover:shadow-lg size-11",
+                    "group flex items-center justify-center rounded-full border border-border/50 bg-muted/50 transition-all hover:border-primary/50 hover:bg-primary/20 hover:shadow-lg size-11",
                   )}
                 >
-                  <social.icon className="text-foreground transition-colors group-hover:text-primary size-5" />
+                  <social.icon className={cn(
+                    "transition-colors size-5",
+                    social.label === "Github" 
+                      ? "text-gray-300 group-hover:text-white" 
+                      : "text-blue-400 group-hover:text-blue-300"
+                  )} />
                   <span className="sr-only">{social.label}</span>
                 </Link>
               ))}
